@@ -13,7 +13,7 @@ class MyCylinder extends CGFobject {
 
     initBuffers() {
         //Arrays needded to store the vertices, indices, normals and texture coordinates
-		this.vertices = [];
+	this.vertices = [];
         this.indices = [];
         this.normals = [];
         this.textCoords = [];
@@ -33,20 +33,32 @@ class MyCylinder extends CGFobject {
         //Calculates and adds the vertices, normals, and texture coordinates
         //according to the alpha angle 'alpha' 
         for(var i = 0; i < this.slices; i++){
-            this.vertices.push(Math.cos(ang), 3, -Math.sin(ang));
-            this.vertices.push(Math.cos(ang), 0, -Math.sin(ang));
-            this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
-            this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
+            this.vertices.push(Math.cos(ang), 3, Math.sin(ang));
+            this.vertices.push(Math.cos(ang), 0, Math.sin(ang));
+            this.normals.push(Math.cos(ang), 0, Math.sin(ang));
+            this.normals.push(Math.cos(ang), 0, Math.sin(ang));
             this.textCoords.push(ang/(2*Math.PI),0);
             this.textCoords.push(ang/(2*Math.PI),0);
             ang += alpha;
         }
 
         //Calculates the indices
-        for(var i = 0; i < this.slices; i++){
+	var i;
+        for(i = 0; i < this.slices; i++){
             this.indices.push(2*i, 2*i+2, 2*i+1);
             this.indices.push(2*i+1, 2*i+2, 2*i+3);
+
+	    //imprimir parte de dentro
+            this.indices.push(2*i+2, 2*i, 2*i+1);
+            this.indices.push(2*i+2, 2*i+1, 2*i+3);
         }
+
+	    //ligação entre ultima aresta e primeira
+            this.indices.push(2*i, 0, 2*i+1);
+            this.indices.push(1, 0, 2*i);
+
+            this.indices.push(0, 2*i, 2*i+1);
+            this.indices.push(0, 1, 2*i);
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
