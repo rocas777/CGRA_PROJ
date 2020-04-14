@@ -13,7 +13,7 @@ class MyCylinder extends CGFobject {
 
     initBuffers() {
         //Arrays needded to store the vertices, indices, normals and texture coordinates
-	this.vertices = [];
+	    this.vertices = [];
         this.indices = [];
         this.normals = [];
         this.textCoords = [];
@@ -43,7 +43,7 @@ class MyCylinder extends CGFobject {
         }
 
         //Calculates the indices
-	var i;
+	    var i;
         for(i = 0; i < this.slices; i++){
             this.indices.push(2*i, 2*i+2, 2*i+1);
             this.indices.push(2*i+1, 2*i+2, 2*i+3);
@@ -54,11 +54,11 @@ class MyCylinder extends CGFobject {
         }
 
 	    //ligação entre ultima aresta e primeira
-            this.indices.push(2*i, 0, 2*i+1);
-            this.indices.push(1, 0, 2*i);
+        this.indices.push(2*i, 0, 2*i+1);
+        this.indices.push(1, 0, 2*i);
 
-            this.indices.push(0, 2*i, 2*i+1);
-            this.indices.push(0, 1, 2*i);
+        this.indices.push(0, 2*i, 2*i+1);
+        this.indices.push(0, 1, 2*i);
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
