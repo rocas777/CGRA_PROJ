@@ -43,7 +43,8 @@ class MyPyramid extends CGFobject {
                 normal[0]*normal[0]+
                 normal[1]*normal[1]+
                 normal[2]*normal[2]
-                );
+            );
+            
             normal[0]/=nsize;
             normal[1]/=nsize;
             normal[2]/=nsize;
