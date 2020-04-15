@@ -27,7 +27,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this,40);
-        this.vehicle = new MyVehicle(this, 5, 5);
+        this.vehicle = new MyVehicle(this, 4, 10);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -106,6 +106,13 @@ class MyScene extends CGFscene {
         
         //Display Vehicle
         if(this.displayVehicle)
+            var rotationMatrix = [
+                1, 0, 0, 0,
+                0, Math.cos(Math.PI/2), Math.sin(Math.PI/2), 0,
+                0, -Math.sin(Math.PI/2), Math.cos(Math.PI/2), 0,
+                0, 0, 0, 1
+            ];
+            this.multMatrix(rotationMatrix);
             this.vehicle.display();
 
         // ---- END Primitive drawing section
