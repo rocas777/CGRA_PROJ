@@ -28,6 +28,7 @@ class MyScene extends CGFscene {
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this,40);
         this.vehicle = new MyVehicle(this, 4, 10);
+	this.unitquad = new MyUnitCubeQuad(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -97,15 +98,17 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
         //This sphere does not have defined texture coordinates
-        if(this.displaySphere)
+        if(this.displaySphere){
             this.incompleteSphere.display();
+	}
 
 	    //Display Cylinder
-        if(this.displayCylinder)
+        if(this.displayCylinder){
             this.cylinder.display();
+	}
         
         //Display Vehicle
-        if(this.displayVehicle)
+        if(this.displayVehicle){
             var rotationMatrix = [
                 1, 0, 0, 0,
                 0, Math.cos(Math.PI/2), Math.sin(Math.PI/2), 0,
@@ -114,6 +117,8 @@ class MyScene extends CGFscene {
             ];
             this.multMatrix(rotationMatrix);
             this.vehicle.display();
+	}
+	this.unitquad.display();
 
         // ---- END Primitive drawing section
     }
