@@ -27,7 +27,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this,40);
-        this.vehicle = new MyVehicle(this, 4, 10);
+        this.vehicle = new MyVehicle(this, 4, 10, 0, 0, 0);
 	this.unitquad = new MyUnitCubeQuad(this);	
     	
         this.sphereTexture = new CGFappearance(this);
@@ -106,7 +106,10 @@ class MyScene extends CGFscene {
 
         //This sphere does not have defined texture coordinates
         if(this.displaySphere){
+            this.pushMatrix();
+            this.sphereTexture.apply();
             this.incompleteSphere.display();
+            this.popMatrix();
 	}
 
 	    //Display Cylinder
@@ -118,12 +121,6 @@ class MyScene extends CGFscene {
         if(this.displayVehicle){
             this.vehicle.display();
 	}
-
-	this.pushMatrix();
-	this.sphereTexture.apply();
-        this.incompleteSphere.display();
-	this.popMatrix();
-
 
 	this.unitquad.display();
 
