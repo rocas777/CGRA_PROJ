@@ -18,11 +18,20 @@ class MyVehicle extends CGFobject {
 
     }
 
+    reset(){
+        this.deltaY = 0;
+        this.initSpeed = 0;
+        this.xPos = 0;
+        this.yPos = 0;
+        this.zPos = 0;
+    }
+
 
     display() {
         this.scene.pushMatrix();
         this.scene.translate(this.xPos, this.yPos, this.zPos);
         this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(this.deltaY, 0, 1, 0);
         this.pyramid.display();
         this.scene.popMatrix();
     }

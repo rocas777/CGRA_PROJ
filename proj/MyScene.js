@@ -27,7 +27,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this,40);
-        this.vehicle = new MyVehicle(this, 4, 10, 0, 0, 3);
+        this.vehicle = new MyVehicle(this, 4, 10, 0, 0, 0);
 	    this.unitquad = new MyUnitCubeQuad(this);
 
         //Objects connected to MyInterface
