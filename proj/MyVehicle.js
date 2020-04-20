@@ -3,13 +3,14 @@
 * @constructor
 */
 class MyVehicle extends CGFobject {
-    constructor(scene, slices, stacks, deltaY, initSpeed, position){
+    constructor(scene, deltaY, initSpeed, xPos, yPos, zPos){
         super(scene);
-        this.slices = slices;
-        this.stacks = stacks;
+        this.pyramid = new MyPyramid(scene, 4, 10);
         this.deltaY = deltaY;
         this.initSpeed = initSpeed;
-        this.position = position;
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.zPos = zPos;
         this.initBuffers();
     }
 
@@ -19,27 +20,13 @@ class MyVehicle extends CGFobject {
 
 
     display() {
-        var rotationMatrix = [
-            1, 0, 0, 0,
-            0, Math.cos(Math.PI/2), Math.sin(Math.PI/2), 0,
-            0, -Math.sin(Math.PI/2), Math.cos(Math.PI/2), 0,
-            0, 0, 0, 1
-        ];
         this.scene.pushMatrix();
-        this.scene.multMatrix(rotationMatrix);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.scene.translate(this.xPos, this.yPos, this.zPos);
         this.pyramid.display();
         this.scene.popMatrix();
     }
 
-        // reinitialize buffers
-        this.initBuffers();
-        this.initNormalVizBuffers();
-    }
-
-    update(){
-        
-    }
 }
 
 
