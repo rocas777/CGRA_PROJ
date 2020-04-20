@@ -1,7 +1,7 @@
 /**
-* MyPyramid
-* @constructor
-*/
+ * MyPyramid
+ * @constructor
+ */
 class MyPyramid extends CGFobject {
     constructor(scene, slices, stacks) {
         super(scene);
@@ -19,7 +19,7 @@ class MyPyramid extends CGFobject {
 
         for(var i = 0; i < this.slices; i++){
             // All vertices have to be declared for a given face
-            // even if they are shared with others, as the normals 
+            // even if they are shared with others, as the normals
             // in each face will be different
 
             var sa=Math.sin(ang);
@@ -43,7 +43,7 @@ class MyPyramid extends CGFobject {
                 normal[0]*normal[0]+
                 normal[1]*normal[1]+
                 normal[2]*normal[2]
-                );
+            );
             normal[0]/=nsize;
             normal[1]/=nsize;
             normal[2]/=nsize;
@@ -61,7 +61,7 @@ class MyPyramid extends CGFobject {
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
-    
+
     updateBuffers(complexity){
         this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-1, so slices varies 3-12
 
@@ -70,5 +70,3 @@ class MyPyramid extends CGFobject {
         this.initNormalVizBuffers();
     }
 }
-
-
