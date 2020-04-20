@@ -19,7 +19,7 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
-        this.setUpdatePeriod(50);
+        this.setUpdatePeriod(2);
         
         this.enableTextures(true);
 
@@ -116,16 +116,7 @@ class MyScene extends CGFscene {
         
         //Display Vehicle
         if(this.displayVehicle){
-	    this.pushMatrix();
-            var rotationMatrix = [
-                1, 0, 0, 0,
-                0, Math.cos(Math.PI/2), Math.sin(Math.PI/2), 0,
-                0, -Math.sin(Math.PI/2), Math.cos(Math.PI/2), 0,
-                0, 0, 0, 1
-            ];
-            this.multMatrix(rotationMatrix);
             this.vehicle.display();
-	    this.popMatrix();
 	}
 
 	this.pushMatrix();
