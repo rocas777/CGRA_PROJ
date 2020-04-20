@@ -10,6 +10,7 @@ class MySphere extends CGFobject {
     this.latDivs = stacks * 2;
     this.longDivs = slices;
 
+
     this.initBuffers();
   }
 
@@ -54,6 +55,7 @@ class MySphere extends CGFobject {
           
           this.indices.push( current + 1, current, next);
           this.indices.push( current + 1, next, next +1);
+	  this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
         }
 
         //--- Normals

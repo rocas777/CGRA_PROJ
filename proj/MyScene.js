@@ -28,7 +28,13 @@ class MyScene extends CGFscene {
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this,40);
         this.vehicle = new MyVehicle(this, 4, 10);
-	this.unitquad = new MyUnitCubeQuad(this);
+	this.unitquad = new MyUnitCubeQuad(this);	
+    	
+        this.sphereTexture = new CGFappearance(this);
+        this.sphereTexture.setAmbient(1, 1, 1, 1);
+        this.sphereTexture.setShininess(10.0);
+        this.sphereTexture.loadTexture('images/earth.jpg');
+        this.sphereTexture.setTextureWrap('REPEAT', 'REPEAT'); 
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -41,6 +47,7 @@ class MyScene extends CGFscene {
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
+
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
@@ -109,6 +116,7 @@ class MyScene extends CGFscene {
         
         //Display Vehicle
         if(this.displayVehicle){
+	    this.pushMatrix();
             var rotationMatrix = [
                 1, 0, 0, 0,
                 0, Math.cos(Math.PI/2), Math.sin(Math.PI/2), 0,
@@ -117,8 +125,18 @@ class MyScene extends CGFscene {
             ];
             this.multMatrix(rotationMatrix);
             this.vehicle.display();
+	    this.popMatrix();
 	}
+
+	this.pushMatrix();
+	this.sphereTexture.apply();
+        this.incompleteSphere.display();
+	this.popMatrix();
+
+
 	this.unitquad.display();
+
+
 
         // ---- END Primitive drawing section
     }
