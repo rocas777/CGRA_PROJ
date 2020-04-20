@@ -3,15 +3,14 @@
 * @constructor
 */
 class MyVehicle extends CGFobject {
-    constructor(scene, deltaY, initSpeed, xPos, yPos, zPos) {
+    constructor(scene, slices, stacks, deltaY, initSpeed, position){
         super(scene);
-        this.pyramid = new MyPyramid(scene, 4, 10);
+        this.slices = slices;
+        this.stacks = stacks;
         this.deltaY = deltaY;
         this.initSpeed = initSpeed;
-        this.speed = 0;
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this.zPos = zPos;
+        this.position = position;
+        this.initBuffers();
     }
 
     update(){
@@ -33,6 +32,14 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
     }
 
+        // reinitialize buffers
+        this.initBuffers();
+        this.initNormalVizBuffers();
+    }
+
+    update(){
+        
+    }
 }
 
 
