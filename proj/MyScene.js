@@ -72,31 +72,31 @@ class MyScene extends CGFscene {
         var keysPressed=false;
 
         // Check for key codes e.g. in https://keycode.info/
-        if (this.gui.isKeyPressed("KeyW")) {
+        if (this.gui.isKeyPressed("87")) {
             this.vehicle.accelerate(0.1);
             text+=" W ";
             keysPressed=true;
         }
 
-        if (this.gui.isKeyPressed("KeyS")) {
+        if (this.gui.isKeyPressed("83")) {
             this.vehicle.accelerate(-0.1);
             text+=" S ";
             keysPressed=true;
         }
 
-        if(this.gui.isKeyPressed("KeyA")){
+        if(this.gui.isKeyPressed("65")){
             this.vehicle.turn(Math.PI/4);
             text += " A ";
             keysPressed = true;
         }
 
-        if(this.gui.isKeyPressed("KeyD")){
+        if(this.gui.isKeyPressed("68")){
             this.vehicle.turn(-Math.PI/4);
             text += " D ";
             keysPressed = true;
         }
 
-        if(this.gui.isKeyPressed("KeyR")){
+        if(this.gui.isKeyPressed("82")){
             this.vehicle.reset();
             text += " R ";
             keysPressed = true;
