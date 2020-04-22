@@ -27,8 +27,8 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this,40);
-        this.vehicle = new MyVehicle(this, 4, 10, 0, 0, 0);
-	this.unitquad = new MyUnitCubeQuad(this);	
+        this.vehicle = new MyVehicle(this, 4, 0, 0, 0, 5);
+	    this.unitquad = new MyUnitCubeQuad(this);
     	
         this.sphereTexture = new CGFappearance(this);
         this.sphereTexture.setAmbient(1, 1, 1, 1);
@@ -81,6 +81,12 @@ class MyScene extends CGFscene {
             keysPressed=true;
         }
 
+        if(this.gui.isKeyPressed("KeyR")){
+            this.vehicle.reset();
+            text += " R ";
+            keysPressed = true;
+        }
+
         if (keysPressed)
             console.log(text);
     }
@@ -99,6 +105,9 @@ class MyScene extends CGFscene {
         // Draw axis
         if (this.displayAxis)
             this.axis.display();
+
+        //Draw environment
+        this.unitquad.display();
 
         this.setDefaultAppearance();
 
@@ -121,10 +130,6 @@ class MyScene extends CGFscene {
         if(this.displayVehicle){
             this.vehicle.display();
 	}
-
-	this.unitquad.display();
-
-
 
         // ---- END Primitive drawing section
     }

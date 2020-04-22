@@ -8,6 +8,7 @@ class MyVehicle extends CGFobject {
         this.pyramid = new MyPyramid(scene, 4, 10);
         this.deltaY = deltaY;
         this.initSpeed = initSpeed;
+        this.speed = initSpeed;
         this.xPos = xPos;
         this.yPos = yPos;
         this.zPos = zPos;
@@ -18,9 +19,15 @@ class MyVehicle extends CGFobject {
 
     }
 
+    accelerate(val){
+        this.speed = this.speed + val;
+        this.translate
+    }
+
     reset(){
         this.deltaY = 0;
         this.initSpeed = 0;
+        this.speed = 0;
         this.xPos = 0;
         this.yPos = 0;
         this.zPos = 0;
