@@ -16,12 +16,16 @@ class MyVehicle extends CGFobject {
     }
 
     update(){
-
+        this.xPos += (speed * this.xPos) * Math.cos(Math.PI / 4);
+        this.yPos += (speed * this.yPos) * Math.cos(Math.PI / 4);
     }
 
     accelerate(val){
         this.speed = this.speed + val;
-        this.translate
+    }
+
+    turn(val){
+        this.deltaY = this.deltaY + val;
     }
 
     reset(){
