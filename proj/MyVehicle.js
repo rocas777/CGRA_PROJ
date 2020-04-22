@@ -16,8 +16,7 @@ class MyVehicle extends CGFobject {
     }
 
     update(){
-        this.xPos += (speed * this.xPos) * Math.cos(Math.PI / 4);
-        this.yPos += (speed * this.yPos) * Math.cos(Math.PI / 4);
+        this.scene.translate(this.xPos*this.speed, 0, this.zPos*this.speed);
     }
 
     accelerate(val){
