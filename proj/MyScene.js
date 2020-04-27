@@ -45,7 +45,7 @@ class MyScene extends CGFscene {
 	this.speedFactor=1;
         this.selectedTexture = 0;  
 
-	this.textureIds = { 'earth': 0};
+	this.textureIds = { 'earth': 0,'sky':1};
 	
         this.texture1 = [new CGFtexture(this, 'images/split_cubemap/left.png'),
 			new CGFtexture(this, 'images/split_cubemap/right.png'),
@@ -53,7 +53,15 @@ class MyScene extends CGFscene {
 			new CGFtexture(this, 'images/split_cubemap/back.png'),
 			new CGFtexture(this, 'images/split_cubemap/top.png'),
 			new CGFtexture(this, 'images/split_cubemap/bottom.png')];
-	this.textures = [this.texture1];
+
+	this.texture2 = [new CGFtexture(this, 'images/split_cubemap/leftSky.png'),
+			new CGFtexture(this, 'images/split_cubemap/rightSky.png'),
+			new CGFtexture(this, 'images/split_cubemap/frontSky.png'),
+			new CGFtexture(this, 'images/split_cubemap/backSky.png'),
+			new CGFtexture(this, 'images/split_cubemap/topSky.png'),
+			new CGFtexture(this, 'images/split_cubemap/bottomSky.png')];
+
+	this.textures = [this.texture1,this.texture2];
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
