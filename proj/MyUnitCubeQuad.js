@@ -59,13 +59,6 @@ class MyUnitCubeQuad extends CGFobject {
         this.materialFront.setShininess(10.0);
         this.materialFront.loadTexture('images/split_cubemap/front.png');
         this.materialFront.setTextureWrap('REPEAT', 'REPEAT');
-
-        this.bottomMaterial = new CGFtexture(this.scene,'images/split_cubemap/bottom.png');
-        this.topMaterial = new CGFtexture(this.scene,'images/split_cubemap/top.png');
-        this.backMaterial = new CGFtexture(this.scene,'images/split_cubemap/back.png')
-        this.rightMaterial = new CGFtexture(this.scene,'images/split_cubemap/right.png')
-        this.leftMaterial = new CGFtexture(this.scene,'images/split_cubemap/left.png')
-        this.frontMaterial = new CGFtexture(this.scene,'images/split_cubemap/front.png')
     }
 
     display() {

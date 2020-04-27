@@ -15,12 +15,15 @@ class MyVehicle extends CGFobject {
         this.yPos = yPos;
         this.zPos = zPos;
         this.initBuffers();
+	this.speedFactor = 1;
     }
 
     update(){
-        this.xPos += (this.speed) * Math.sin(-this.deltaY);
-        this.zPos += (this.speed) * Math.cos(this.deltaY);
+        this.xPos += (this.speed) * Math.sin(-this.deltaY) * this.speedFactor;
+        this.zPos += (this.speed) * Math.cos(this.deltaY) * this.speedFactor;
     }
+
+
 
     accelerate(val){
         this.speed = this.speed + val;
@@ -45,6 +48,7 @@ class MyVehicle extends CGFobject {
         this.scene.translate(this.xPos, this.yPos, this.zPos);
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.scene.rotate(this.deltaY, 0, 0, 1);
+	this.scene.scale(this.scene.scaleFactor,this.scene.scaleFactor,this.scene.scaleFactor);
         this.body.display();
         this.scene.popMatrix();
     }

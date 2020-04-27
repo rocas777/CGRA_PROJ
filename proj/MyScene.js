@@ -28,7 +28,7 @@ class MyScene extends CGFscene {
         this.incompleteSphere = new MySphere(this, 300, 10);
         this.cylinder = new MyCylinder(this,40);
         this.vehicle = new MyVehicle(this, 0, 0, 0, 0, 5);
-	    this.unitquad = new MyUnitCubeQuad(this);
+	this.unitquad = new MyUnitCubeQuad(this);
     	
         this.sphereTexture = new CGFappearance(this);
         this.sphereTexture.setAmbient(1, 1, 1, 1);
@@ -41,6 +41,14 @@ class MyScene extends CGFscene {
         this.displaySphere = false;
         this.displayCylinder = false;
         this.displayVehicle = false;
+	this.scaleFactor=1;
+	this.speedFactor=1;
+        this.selectedTexture = -1;  
+
+	this.textureIds = { 'earth': 0};
+	
+        this.texture1 = new CGFtexture(this, 'images/earth.jpg');
+	this.textures = [this.texture1];
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -52,6 +60,15 @@ class MyScene extends CGFscene {
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
+
+    updateAppliedTexture() {
+        this.sphereTexture.setTexture(this.textures[this.selectedTexture]);
+    }
+
+    speedUpdate(){
+	this.vehicle.speedFactor=this.speedFactor;
+    }    
+
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
@@ -136,10 +153,10 @@ class MyScene extends CGFscene {
             this.popMatrix();
 	}
 
-	    /*/Display Cylinder
+	//Display Cylinder
         if(this.displayCylinder){
             this.cylinder.display();
-	}*/
+	}
         
         //Display Vehicle
         if(this.displayVehicle){
