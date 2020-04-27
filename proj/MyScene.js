@@ -43,11 +43,16 @@ class MyScene extends CGFscene {
         this.displayVehicle = false;
 	this.scaleFactor=1;
 	this.speedFactor=1;
-        this.selectedTexture = -1;  
+        this.selectedTexture = 0;  
 
 	this.textureIds = { 'earth': 0};
 	
-        this.texture1 = new CGFtexture(this, 'images/earth.jpg');
+        this.texture1 = [new CGFtexture(this, 'images/split_cubemap/left.png'),
+			new CGFtexture(this, 'images/split_cubemap/right.png'),
+			new CGFtexture(this, 'images/split_cubemap/front.png'),
+			new CGFtexture(this, 'images/split_cubemap/back.png'),
+			new CGFtexture(this, 'images/split_cubemap/top.png'),
+			new CGFtexture(this, 'images/split_cubemap/bottom.png')];
 	this.textures = [this.texture1];
     }
     initLights() {
@@ -62,7 +67,12 @@ class MyScene extends CGFscene {
     }
 
     updateAppliedTexture() {
-        this.sphereTexture.setTexture(this.textures[this.selectedTexture]);
+        this.unitquad.materialLeft.setTexture(this.textures[this.selectedTexture][0]);
+        this.unitquad.materialRight.setTexture(this.textures[this.selectedTexture][1]);
+        this.unitquad.materialFront.setTexture(this.textures[this.selectedTexture][2]);
+        this.unitquad.materialBack.setTexture(this.textures[this.selectedTexture][3]);
+        this.unitquad.materialTop.setTexture(this.textures[this.selectedTexture][4]);
+        this.unitquad.materialBottom.setTexture(this.textures[this.selectedTexture][5]);
     }
 
     speedUpdate(){
@@ -74,6 +84,7 @@ class MyScene extends CGFscene {
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
+	this.updateAppliedTexture();
     }
     
     // called periodically (as per setUpdatePeriod() in init())
