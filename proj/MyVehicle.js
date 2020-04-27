@@ -5,7 +5,9 @@
 class MyVehicle extends CGFobject {
     constructor(scene, deltaY, initSpeed, xPos, yPos, zPos){
         super(scene);
-        this.pyramid = new MyPyramid(scene, 4, 10);
+        this.body = new MyCylinder(scene, 200);
+        this.front = new MySphere(scene, 300, 10);
+        this.back = new MySphere(scene, 300, 10);
         this.deltaY = deltaY;
         this.initSpeed = initSpeed;
         this.speed = initSpeed;
@@ -43,7 +45,7 @@ class MyVehicle extends CGFobject {
         this.scene.translate(this.xPos, this.yPos, this.zPos);
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.scene.rotate(this.deltaY, 0, 0, 1);
-        this.pyramid.display();
+        this.body.display();
         this.scene.popMatrix();
     }
 
