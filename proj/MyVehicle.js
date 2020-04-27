@@ -16,7 +16,8 @@ class MyVehicle extends CGFobject {
     }
 
     update(){
-        this.scene.translate(this.xPos*this.speed, 0, this.zPos*this.speed);
+        this.xPos += (this.speed) * Math.sin(-this.deltaY);
+        this.zPos += (this.speed) * Math.cos(this.deltaY);
     }
 
     accelerate(val){
@@ -41,7 +42,7 @@ class MyVehicle extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(this.xPos, this.yPos, this.zPos);
         this.scene.rotate(Math.PI/2, 1, 0, 0);
-        this.scene.rotate(this.deltaY, 0, 1, 0);
+        this.scene.rotate(this.deltaY, 0, 0, 1);
         this.pyramid.display();
         this.scene.popMatrix();
     }

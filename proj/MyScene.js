@@ -19,7 +19,7 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
-        this.setUpdatePeriod(2);
+        this.setUpdatePeriod(50);
         
         this.enableTextures(true);
 
@@ -27,7 +27,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this,40);
-        this.vehicle = new MyVehicle(this, 4, 0, 0, 0, 5);
+        this.vehicle = new MyVehicle(this, 0, 0, 0, 0, 5);
 	    this.unitquad = new MyUnitCubeQuad(this);
     	
         this.sphereTexture = new CGFappearance(this);
@@ -73,25 +73,25 @@ class MyScene extends CGFscene {
 
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
-            this.vehicle.accelerate(0.1);
+            this.vehicle.accelerate(0.01);
             text+=" W ";
             keysPressed=true;
         }
 
         if (this.gui.isKeyPressed("KeyS")) {
-            this.vehicle.accelerate(-0.1);
+            this.vehicle.accelerate(-0.01);
             text+=" S ";
             keysPressed=true;
         }
 
         if(this.gui.isKeyPressed("KeyA")){
-            this.vehicle.turn(Math.PI*10/180);
+            this.vehicle.turn(-Math.PI*10/180);
             text += " A ";
             keysPressed = true;
         }
 
         if(this.gui.isKeyPressed("KeyD")){
-            this.vehicle.turn(-Math.PI*10/180);
+            this.vehicle.turn(Math.PI*10/180);
             text += " D ";
             keysPressed = true;
         }
