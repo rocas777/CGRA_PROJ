@@ -27,22 +27,22 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 300, 10);
         this.cylinder = new MyCylinder(this,40);
-        this.vehicle = new MyVehicle(this, 0, 0, 0, 0, 5);
-	this.unitquad = new MyUnitCubeQuad(this);
+        this.vehicle = new MyVehicle(this, 0, 0, 0, 0, 0);
+	    this.unitquad = new MyUnitCubeQuad(this);
     	
         this.sphereTexture = new CGFappearance(this);
         this.sphereTexture.setAmbient(1, 1, 1, 1);
         this.sphereTexture.setShininess(10.0);
         this.sphereTexture.loadTexture('images/earth.jpg');
-        this.sphereTexture.setTextureWrap('REPEAT', 'REPEAT'); 
+        this.sphereTexture.setTextureWrap('REPEAT', 'REPEAT');
 
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displaySphere = false;
         this.displayCylinder = false;
         this.displayVehicle = false;
-	this.scaleFactor=1;
-	this.speedFactor=1;
+	    this.scaleFactor=1;
+	    this.speedFactor=1;
         this.selectedTexture = 0;  
 
 	this.textureIds = { 'earth': 0,'sky':1};
@@ -54,7 +54,7 @@ class MyScene extends CGFscene {
 			new CGFtexture(this, 'images/split_cubemap/top.png'),
 			new CGFtexture(this, 'images/split_cubemap/bottom.png')];
 
-	this.texture2 = [new CGFtexture(this, 'images/split_cubemap/leftSky.png'),
+	    this.texture2 = [new CGFtexture(this, 'images/split_cubemap/leftSky.png'),
 			new CGFtexture(this, 'images/split_cubemap/rightSky.png'),
 			new CGFtexture(this, 'images/split_cubemap/frontSky.png'),
 			new CGFtexture(this, 'images/split_cubemap/backSky.png'),
@@ -63,6 +63,7 @@ class MyScene extends CGFscene {
 
 	this.textures = [this.texture1,this.texture2];
     }
+
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -70,6 +71,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
 
     }
+
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
@@ -92,7 +94,7 @@ class MyScene extends CGFscene {
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
-	this.updateAppliedTexture();
+	    this.updateAppliedTexture();
     }
     
     // called periodically (as per setUpdatePeriod() in init())
@@ -121,13 +123,13 @@ class MyScene extends CGFscene {
         }
 
         if(this.gui.isKeyPressed("KeyA")){
-            this.vehicle.turn(-Math.PI*10/180);
+            this.vehicle.turn(Math.PI*5/180);
             text += " A ";
             keysPressed = true;
         }
 
         if(this.gui.isKeyPressed("KeyD")){
-            this.vehicle.turn(Math.PI*10/180);
+            this.vehicle.turn(-Math.PI*5/180);
             text += " D ";
             keysPressed = true;
         }
@@ -157,9 +159,6 @@ class MyScene extends CGFscene {
         if (this.displayAxis)
             this.axis.display();
 
-        //Draw environment
-        this.unitquad.display();
-
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
@@ -172,15 +171,18 @@ class MyScene extends CGFscene {
             this.popMatrix();
 	}
 
-	//Display Cylinder
+	    //Display Cylinder
         if(this.displayCylinder){
             this.cylinder.display();
-	}
+	    }
         
         //Display Vehicle
         if(this.displayVehicle){
             this.vehicle.display();
-	}
+	    }
+
+        //Draw environment
+        this.unitquad.display();
 
         // ---- END Primitive drawing section
     }

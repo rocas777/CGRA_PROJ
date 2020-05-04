@@ -55,7 +55,7 @@ class MySphere extends CGFobject {
           
           this.indices.push( current + 1, current, next);
           this.indices.push( current + 1, next, next +1);
-	  this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
+	      this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
         }
 
         //--- Normals
@@ -66,10 +66,6 @@ class MySphere extends CGFobject {
         this.normals.push(x, y, z);
         theta += thetaInc;
 
-        //--- Texture Coordinates
-        // To be done... 
-        // May need some additional code also in the beginning of the function.
-        
       }
       phi += phiInc;
     }
