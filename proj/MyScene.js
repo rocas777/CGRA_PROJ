@@ -28,7 +28,7 @@ class MyScene extends CGFscene {
         this.incompleteSphere = new MySphere(this, 300, 10);
         this.cylinder = new MyCylinder(this,40);
         this.vehicle = new MyVehicle(this, 0, 0, 0, 0, 0);
-	    this.unitquad = new MyUnitCubeQuad(this);
+	this.unitquad = new MyUnitCubeQuad(this);
     	
         this.sphereTexture = new CGFappearance(this);
         this.sphereTexture.setAmbient(1, 1, 1, 1);
@@ -44,6 +44,10 @@ class MyScene extends CGFscene {
 	    this.scaleFactor=1;
 	    this.speedFactor=1;
         this.selectedTexture = 0;  
+
+	this.supplies_counter=-1;
+	this.supplies = [];
+	this.l_is_pressed=false;
 
 	this.textureIds = { 'earth': 0,'sky':1};
 	
@@ -102,12 +106,28 @@ class MyScene extends CGFscene {
         //To be done...
         this.checkKeys();
         this.vehicle.update();
+	for(let i=0;i<=this.supplies_counter;i++){
+		this.supplies[i].update();
+	}
+    }
+
+    drop(x,y,z){
+		if(this.supplies_counter<4){
+			this.supplies_counter++;
+			this.supplies[this.supplies_counter] = new MySupply(this,x,y,z);
+			console.log("entrou no if");
+		}
+		console.log("Entour no drop");
     }
 
     checkKeys() {
 
         var text="Keys pressed: ";
         var keysPressed=false;
+	if(this.l_is_pressed)
+		console.log("true");
+	else
+		console.log("false");
 
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
@@ -136,12 +156,26 @@ class MyScene extends CGFscene {
 
         if(this.gui.isKeyPressed("KeyR")){
             this.vehicle.reset();
+	    this.supplies_counter=-1;
             text += " R ";
             keysPressed = true;
         }
 
-        if (keysPressed)
-            console.log(text);
+	if(this.gui.isKeyPressed("KeyL")){
+		if(this.l_is_pressed==false){
+	   		this.l_is_pressed=true;
+           		this.drop(0,5,0);
+            		text += " L ";
+            		keysPressed = true;
+		}
+        }
+	else{
+		this.l_is_pressed=false;
+	}
+		
+
+        //if (keysPressed)
+        //    console.log(text);
     }
 
     display() {
@@ -182,7 +216,14 @@ class MyScene extends CGFscene {
 	    }
 
         //Draw environment
+	this.pushMatrix();
+        this.scale(50,50,50);
         this.unitquad.display();
+	this.popMatrix();
+
+	for(let i=0;i<=this.supplies_counter;i++){
+		this.supplies[i].display();
+	}
 
         // ---- END Primitive drawing section
     }

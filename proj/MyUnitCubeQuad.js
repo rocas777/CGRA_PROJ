@@ -66,7 +66,7 @@ class MyUnitCubeQuad extends CGFobject {
         //bottom
         this.scene.pushMatrix();
         //this.scene.setLightBlue();
-        this.scene.scale(50,50,50);
+        //this.scene.scale(50,50,50);
         this.scene.rotate(-90*Math.PI/180,1,0,0);
         this.scene.translate(0, 0, -0.5);
         this.materialBottom.apply();
@@ -76,7 +76,7 @@ class MyUnitCubeQuad extends CGFobject {
         //top
         this.scene.pushMatrix();
         //this.scene.setLightBlue();
-        this.scene.scale(50,50,50);
+        //this.scene.scale(50,50,50);
         this.scene.rotate(90*Math.PI/180,1,0,0);
         this.scene.translate(0, 0, -0.5);
         this.materialTop.apply();
@@ -88,7 +88,7 @@ class MyUnitCubeQuad extends CGFobject {
         //Lower Z
         this.scene.pushMatrix();
         //this.scene.setLightBlue();
-        this.scene.scale(50,50,50);
+        //this.scene.scale(50,50,50);
         this.scene.translate(0, 0, -0.5)
         this.materialFront.apply();
         this.quad.display();
@@ -97,7 +97,7 @@ class MyUnitCubeQuad extends CGFobject {
 
         this.scene.pushMatrix();
         //this.scene.setLightBlue();
-        this.scene.scale(50,50,50);
+        //this.scene.scale(50,50,50);
         this.scene.translate(0, 0, 0.5)
         this.scene.rotate(180*Math.PI/180,0,1,0);
         this.materialBack.apply();
@@ -107,7 +107,7 @@ class MyUnitCubeQuad extends CGFobject {
 
         this.scene.pushMatrix();
         //this.scene.setLightBlue();
-        this.scene.scale(50,50,50);
+        //this.scene.scale(50,50,50);
         this.scene.translate(-0.5, 0, 0)
         this.scene.rotate(90*Math.PI/180,0,1,0);
         this.materialLeft.apply();
@@ -117,7 +117,7 @@ class MyUnitCubeQuad extends CGFobject {
 
         this.scene.pushMatrix();
         //this.scene.setLightBlue();
-        this.scene.scale(50,50,50);
+        //this.scene.scale(50,50,50);
         this.scene.translate(0.5, 0, 0)
         this.scene.rotate(-90*Math.PI/180,0,1,0);
         this.materialRight.apply();
