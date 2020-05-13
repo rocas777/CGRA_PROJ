@@ -26,9 +26,9 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 300, 10);
-        this.cylinder = new MyCylinder(this,40);
-        this.vehicle = new MyVehicle(this, 0, 0, 0, 0, 0);
-	this.unitquad = new MyUnitCubeQuad(this);
+        this.cylinder = new MyCylinder(this,50);
+        this.vehicle = new MyVehicle(this, 0, 0, 0, 0, -1);
+	    this.unitquad = new MyUnitCubeQuad(this);
     	
         this.sphereTexture = new CGFappearance(this);
         this.sphereTexture.setAmbient(1, 1, 1, 1);
@@ -40,7 +40,6 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displaySphere = false;
         this.displayCylinder = false;
-        this.displayVehicle = false;
 	    this.scaleFactor=1;
 	    this.speedFactor=1;
         this.selectedTexture = 0;  
@@ -203,7 +202,7 @@ class MyScene extends CGFscene {
             this.sphereTexture.apply();
             this.incompleteSphere.display();
             this.popMatrix();
-	}
+	    }
 
 	    //Display Cylinder
         if(this.displayCylinder){
@@ -211,9 +210,7 @@ class MyScene extends CGFscene {
 	    }
         
         //Display Vehicle
-        if(this.displayVehicle){
-            this.vehicle.display();
-	    }
+        this.vehicle.display();
 
         //Draw environment
 	this.pushMatrix();

@@ -45,7 +45,6 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
         this.gui.add(this.scene, 'displaySphere').name('Display Sphere');
         this.gui.add(this.scene, 'displayCylinder').name('Display Cylinder');
-        this.gui.add(this.scene, 'displayVehicle').name('Display Vehicle');
 
 	this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
 	this.gui.add(this.scene, 'speedFactor', 0.1, 3.0).name('Speed').onChange(this.scene.speedUpdate.bind(this.scene));
