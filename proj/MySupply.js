@@ -146,7 +146,7 @@ class MySupply extends CGFobject {
 
     update(){
 	if(this.state==SupplyStates.FALLING){
-        	this.ypos -= 0.1;
+        	this.ypos -= 0.17;
 		this.land();
 	}
     }

@@ -65,6 +65,7 @@ class MyScene extends CGFscene {
 			new CGFtexture(this, 'images/split_cubemap/bottomSky.png')];
 
 	this.textures = [this.texture1,this.texture2];
+	this.vehicle.reset();
     }
 
     initLights() {
@@ -159,19 +160,19 @@ class MyScene extends CGFscene {
             text += " R ";
             keysPressed = true;
         }
-	if(!keysPressed){
-            	this.vehicle.turn(0);
-		this.l_is_pressed=false;
-	}
 
 	if(this.gui.isKeyPressed("KeyL")){
 		if(this.l_is_pressed==false){
 	   		this.l_is_pressed=true;
-           		this.drop(0,5,0);
+           		this.drop(this.vehicle.xPos,10,this.vehicle.zPos);
             		text += " L ";
-            		keysPressed = true;
 		}
+            	keysPressed = true;
         }
+	if(!keysPressed){
+            	this.vehicle.turn(0);
+		this.l_is_pressed=false;
+	}
 		
 
         //if (keysPressed)
