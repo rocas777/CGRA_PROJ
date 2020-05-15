@@ -5,9 +5,8 @@
 class MyVehicle extends CGFobject {
     constructor(scene, deltaY, initSpeed, xPos, yPos, zPos){
         super(scene);
-        this.body = new MyCylinder(scene, 200);
-        this.front = new MySphere(scene, 300, 10);
-        this.back = new MySphere(scene, 300, 10);
+        this.body = new MySphere(scene, 200, 7);
+	this.leme = new MyTriangle(scene);
         this.deltaY = deltaY;
         this.initSpeed = initSpeed;
         this.speed = initSpeed;
@@ -15,6 +14,7 @@ class MyVehicle extends CGFobject {
         this.yPos = yPos;
         this.zPos = zPos;
         this.initBuffers();
+	this.val=0;
 	    this.speedFactor = 1;
     }
 
@@ -28,6 +28,7 @@ class MyVehicle extends CGFobject {
     }
 
     turn(val){
+	this.val=val;
         this.deltaY = this.deltaY + val;
     }
 
@@ -39,25 +40,75 @@ class MyVehicle extends CGFobject {
         this.yPos = 0;
         this.zPos = 0;
     }
+    displayLemes(){	
+        this.scene.pushMatrix();
+        this.scene.translate(0, 0, -2);
+	this.scene.scale(0.5,0.5,0.5);
+
+	//baixo
+	this.scene.pushMatrix();
+
+        this.scene.translate(0, -1.3, 0);
+	if(this.val==-Math.PI*5/180)
+		this.scene.rotate(-Math.PI/8,0,-1,0);
+	if(this.val==Math.PI*5/180)
+		this.scene.rotate(-Math.PI/8,0,1,0);
+	this.scene.rotate(Math.PI/2,0,0,-1);
+	this.scene.rotate(Math.PI/2,1,0,0);
+	this.leme.display();
+        this.scene.popMatrix();
+
+	//cima
+	this.scene.pushMatrix();
+
+        this.scene.translate(0, 1.3, 0);
+	if(this.val==-Math.PI*5/180)
+		this.scene.rotate(-Math.PI/8,0,-1,0);
+	if(this.val==Math.PI*5/180)
+		this.scene.rotate(-Math.PI/8,0,1,0);
+	this.scene.rotate(Math.PI/2,0,0,1);
+	this.scene.rotate(Math.PI/2,1,0,0);
+	this.leme.display();
+        this.scene.popMatrix();
+	
+	
+        this.scene.pushMatrix();
+	
+        
+	//esquerda
+        this.scene.pushMatrix();
+	this.scene.rotate(Math.PI,0,0,1);
+        this.scene.translate(1.5, 0, 0.5);
+	this.scene.rotate(Math.PI/2,1,0,0);
+	this.leme.display();
+        this.scene.popMatrix();
+
+	//direita
+        this.scene.pushMatrix();
+        this.scene.translate(1.5, 0, 0.5);
+	this.scene.rotate(Math.PI/2,1,0,0);
+	this.leme.display();
+        this.scene.popMatrix();
+	
+        this.scene.popMatrix();
+
+        this.scene.popMatrix();
+    }
 
 
     display() {
         this.scene.pushMatrix();
-        this.scene.translate(this.xPos, this.yPos, this.zPos);
+        this.scene.translate(this.xPos, 10, this.zPos);        				
+	this.scene.scale(this.scene.scaleFactor,this.scene.scaleFactor,this.scene.scaleFactor);
         this.scene.rotate(this.deltaY, 0, 1, 0);
-        this.scene.scale(this.scene.scaleFactor,this.scene.scaleFactor,this.scene.scaleFactor);
         this.scene.pushMatrix();
-        this.scene.rotate(Math.PI/2, 1, 0, 0);
+	this.displayLemes();
+        this.scene.popMatrix();	
+
+
+	this.scene.scale(1,1,2);
         this.body.display();
-        this.scene.popMatrix();
-        this.scene.pushMatrix();
-        this.back.display();
-        this.scene.popMatrix();
-        this.scene.pushMatrix();
-        this.scene.translate(0, 0, 2);
-        this.front.display();
-        this.scene.popMatrix();
-        this.scene.popMatrix(); 
+        this.scene.popMatrix();	
     }
 
 }

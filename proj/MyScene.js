@@ -159,6 +159,10 @@ class MyScene extends CGFscene {
             text += " R ";
             keysPressed = true;
         }
+	if(!keysPressed){
+            	this.vehicle.turn(0);
+		this.l_is_pressed=false;
+	}
 
 	if(this.gui.isKeyPressed("KeyL")){
 		if(this.l_is_pressed==false){
@@ -168,9 +172,6 @@ class MyScene extends CGFscene {
             		keysPressed = true;
 		}
         }
-	else{
-		this.l_is_pressed=false;
-	}
 		
 
         //if (keysPressed)
@@ -189,14 +190,17 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
         
         // Draw axis
-        if (this.displayAxis)
+        if (this.displayAxis){
             this.axis.display();
-
+	}
+	
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
 
         //This sphere does have defined texture coordinates
+	this.pushMatrix();
+	this.scale(0.5,0.5,0.5);
         if(this.displaySphere){
             this.pushMatrix();
             this.sphereTexture.apply();
@@ -221,7 +225,7 @@ class MyScene extends CGFscene {
 	for(let i=0;i<=this.supplies_counter;i++){
 		this.supplies[i].display();
 	}
-
+	this.popMatrix();
         // ---- END Primitive drawing section
     }
 }
