@@ -2,10 +2,13 @@
 * MyScene
 * @constructor
 */
+
 class MyScene extends CGFscene {
+
     constructor() {
         super();
     }
+
     init(application) {
         super.init(application);
         this.initCameras();
@@ -29,6 +32,7 @@ class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this,50);
         this.vehicle = new MyVehicle(this, 0, 0, 0, 0, -1);
 	    this.unitquad = new MyUnitCubeQuad(this);
+	    this.terrain = new MyTerrain(this);
     	
         this.sphereTexture = new CGFappearance(this);
         this.sphereTexture.setAmbient(1, 1, 1, 1);
@@ -44,11 +48,11 @@ class MyScene extends CGFscene {
 	    this.speedFactor=1;
         this.selectedTexture = 0;  
 
-	this.supplies_counter=-1;
-	this.supplies = [];
-	this.l_is_pressed=false;
+	    this.supplies_counter=-1;
+	    this.supplies = [];
+	    this.l_is_pressed=false;
 
-	this.textureIds = { 'earth': 0,'sky':1};
+	    this.textureIds = { 'earth': 0,'sky':1};
 	
         this.texture1 = [new CGFtexture(this, 'images/split_cubemap/left.png'),
 			new CGFtexture(this, 'images/split_cubemap/right.png'),
@@ -64,8 +68,8 @@ class MyScene extends CGFscene {
 			new CGFtexture(this, 'images/split_cubemap/topSky.png'),
 			new CGFtexture(this, 'images/split_cubemap/bottomSky.png')];
 
-	this.textures = [this.texture1,this.texture2];
-	this.vehicle.reset();
+	    this.textures = [this.texture1,this.texture2];
+	    this.vehicle.reset();
     }
 
     initLights() {
@@ -90,7 +94,7 @@ class MyScene extends CGFscene {
     }
 
     speedUpdate(){
-	this.vehicle.speedFactor=this.speedFactor;
+	    this.vehicle.speedFactor = this.speedFactor;
     }    
 
     setDefaultAppearance() {
@@ -103,31 +107,24 @@ class MyScene extends CGFscene {
     
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
-        //To be done...
         this.checkKeys();
         this.vehicle.update();
-	for(let i=0;i<=this.supplies_counter;i++){
-		this.supplies[i].update();
-	}
+	    for(let i=0;i<=this.supplies_counter;i++){
+		    this.supplies[i].update();
+	    }
     }
 
     drop(x,y,z){
 		if(this.supplies_counter<4){
 			this.supplies_counter++;
 			this.supplies[this.supplies_counter] = new MySupply(this,x,y,z);
-			console.log("entrou no if");
 		}
-		console.log("Entour no drop");
     }
 
     checkKeys() {
 
         var text="Keys pressed: ";
         var keysPressed=false;
-	if(this.l_is_pressed)
-		console.log("true");
-	else
-		console.log("false");
 
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
@@ -156,27 +153,25 @@ class MyScene extends CGFscene {
 
         if(this.gui.isKeyPressed("KeyR")){
             this.vehicle.reset();
-	    this.supplies_counter=-1;
+	        this.supplies_counter=-1;
             text += " R ";
             keysPressed = true;
         }
 
-	if(this.gui.isKeyPressed("KeyL")){
-		if(this.l_is_pressed==false){
-	   		this.l_is_pressed=true;
+	    if(this.gui.isKeyPressed("KeyL")){
+		    if(this.l_is_pressed==false){
+	   		    this.l_is_pressed=true;
            		this.drop(this.vehicle.xPos,10,this.vehicle.zPos);
             		text += " L ";
-		}
+		    }
             	keysPressed = true;
         }
-	if(!keysPressed){
-            	this.vehicle.turn(0);
-		this.l_is_pressed=false;
-	}
-		
 
-        //if (keysPressed)
-        //    console.log(text);
+	    if(!keysPressed){
+            	this.vehicle.turn(0);
+		    this.l_is_pressed=false;
+	    }
+
     }
 
     display() {
@@ -200,8 +195,8 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
         //This sphere does have defined texture coordinates
-	this.pushMatrix();
-	this.scale(0.5,0.5,0.5);
+	    this.pushMatrix();
+	    this.scale(0.5,0.5,0.5);
         if(this.displaySphere){
             this.pushMatrix();
             this.sphereTexture.apply();
@@ -218,15 +213,15 @@ class MyScene extends CGFscene {
         this.vehicle.display();
 
         //Draw environment
-	this.pushMatrix();
+	    this.pushMatrix();
         this.scale(50,50,50);
         this.unitquad.display();
-	this.popMatrix();
+	    this.popMatrix();
 
-	for(let i=0;i<=this.supplies_counter;i++){
-		this.supplies[i].display();
-	}
-	this.popMatrix();
+	    for(let i=0;i<=this.supplies_counter;i++){
+		    this.supplies[i].display();
+	    }
+	    this.popMatrix();
         // ---- END Primitive drawing section
     }
 }

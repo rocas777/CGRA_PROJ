@@ -22,16 +22,17 @@ class MyTriangle extends CGFobject {
 
         this.indices = [
             2, 0, 1,
-	    3, 5, 4
-        ];		
-	this.normals = [
-		0,0,1,
-		0,0,1,
-		0,0,1,
-		0,0,-1,
-		0,0,-1,
-		0,0,-1
-	];
+	        3, 5, 4
+        ];
+
+	    this.normals = [
+		    0,0,1,
+		    0,0,1,
+		    0,0,1,
+		    0,0,-1,
+		    0,0,-1,
+		    0,0,-1
+	    ];
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();

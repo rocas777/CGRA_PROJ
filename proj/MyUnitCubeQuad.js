@@ -36,7 +36,7 @@ class MyUnitCubeQuad extends CGFobject {
         //this.materialBack.loadTexture('images/split_cubemap/back.png');
         this.materialBack.setTextureWrap('REPEAT', 'REPEAT');
 
-	this.materialRight = new CGFappearance(this.scene);
+	    this.materialRight = new CGFappearance(this.scene);
         this.materialRight.setAmbient(1, 1, 1, 1);
         this.materialRight.setDiffuse(0, 0, 0, 1);
         this.materialRight.setSpecular(0, 0, 0, 1);
@@ -44,7 +44,7 @@ class MyUnitCubeQuad extends CGFobject {
         //this.materialRight.loadTexture('images/split_cubemap/right.png');
         this.materialRight.setTextureWrap('REPEAT', 'REPEAT');
 
-	this.materialLeft = new CGFappearance(this.scene);
+	    this.materialLeft = new CGFappearance(this.scene);
         this.materialLeft.setAmbient(1, 1, 1, 1);
         this.materialLeft.setDiffuse(0, 0, 0, 1);
         this.materialLeft.setSpecular(0, 0, 0, 1);
@@ -52,7 +52,7 @@ class MyUnitCubeQuad extends CGFobject {
         //this.materialLeft.loadTexture('images/split_cubemap/left.png');
         this.materialLeft.setTextureWrap('REPEAT', 'REPEAT');
 
-	this.materialFront = new CGFappearance(this.scene);
+	    this.materialFront = new CGFappearance(this.scene);
         this.materialFront.setAmbient(1, 1, 1, 1);
         this.materialFront.setDiffuse(0, 0, 0, 1);
         this.materialFront.setSpecular(0, 0, 0, 1);
