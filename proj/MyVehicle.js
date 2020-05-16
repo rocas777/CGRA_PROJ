@@ -60,10 +60,10 @@ class MyVehicle extends CGFobject {
 	    this.scene.pushMatrix();
 
         this.scene.translate(0, -1.3, 0);
-	    if(this.val==-Math.PI*5/180)
-		    this.scene.rotate(-Math.PI/8,0,-1,0);
-	    if(this.val==Math.PI*5/180)
-		    this.scene.rotate(-Math.PI/8,0,1,0);
+	    if(this.val<0)
+		    this.scene.rotate(Math.PI/8,0,1,0);
+	    if(this.val>0)
+		    this.scene.rotate(Math.PI/8,0,-1,0);
 	    this.scene.rotate(Math.PI/2,0,0,-1);
 	    this.scene.rotate(Math.PI/2,1,0,0);
 	    this.leme.display();
@@ -74,9 +74,9 @@ class MyVehicle extends CGFobject {
 
         this.scene.translate(0, 1.3, 0);
 	    if(this.val<0)
-		    this.scene.rotate(-Math.PI/8,0,-1,0);
+		    this.scene.rotate(Math.PI/8,0,1,0);
 	    if(this.val>0)
-		    this.scene.rotate(-Math.PI/8,0,1,0);
+		    this.scene.rotate(Math.PI/8,0,-1,0);
 	    this.scene.rotate(Math.PI/2,0,0,1);
 	    this.scene.rotate(Math.PI/2,1,0,0);
 	    this.leme.display();

@@ -85,6 +85,10 @@ class MyScene extends CGFscene {
 			new CGFtexture(this, 'images/split_cubemap/bottomSky.png')];
 
 	    this.textures = [this.texture1,this.texture2];
+
+	    for(let i=0;i<5;i++){
+		this.supplies[i] = new MySupply(this);
+	    }
 	    this.vehicle.reset();
     }
 
@@ -144,13 +148,6 @@ class MyScene extends CGFscene {
         this.vehicle.update();
     }
 
-    drop(x,y,z){
-		if(this.supplies_counter<4){
-			this.supplies_counter++;
-			this.supplies[this.supplies_counter] = new MySupply(this,x,y,z);
-		}
-    }
-
     checkKeys() {
 
         var text="Keys pressed: ";
@@ -185,6 +182,7 @@ class MyScene extends CGFscene {
 			this.d = new Date();
 			this.lastTime = this.d;
 			this.autopilot=true;
+        	    	keysPressed = true;
         	}
 	}
 
@@ -198,8 +196,12 @@ class MyScene extends CGFscene {
 
 	if(this.gui.isKeyPressed("KeyL")){
 	    if(this.l_is_pressed==false){
-	  		    this.l_is_pressed=true;
-          		this.drop(this.vehicle.xPos,10,this.vehicle.zPos);
+	  		this.l_is_pressed=true;
+			if(this.supplies_counter<4){
+				this.supplies_counter+=1;
+				this.supplies[this.supplies_counter].drop(this.vehicle.xPos,10,this.vehicle.zPos);
+				console.log(this.supplies_counter);
+			}
            		text += " L ";
 	    }
             keysPressed = true;

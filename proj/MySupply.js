@@ -4,14 +4,12 @@
  * @param scene - Reference to MyScene object
  */
 class MySupply extends CGFobject {
-    constructor(scene,x,y,z) {
+    constructor(scene) {
         super(scene);
 	    this.scene=scene;
-	    this.state=SupplyStates.FALLING;
-	    this.xpos=x;
-	    this.ypos=y;
-	    this.zpos=z;
+	    this.state=SupplyStates.INACTIVE;
         this.quad = new MyQuad(this.scene);
+	this.randomAng = Math.random();
 
         this.initCubeMaterials();
     }
@@ -67,82 +65,143 @@ class MySupply extends CGFobject {
     }
 
     falling(){
-	    this.displayCube();
+	    //Front
+        	this.scene.pushMatrix();
+        	this.scene.translate(0, 0, 0.5);
+        	this.materialTop.apply();
+        	this.quad.display();
+        	this.scene.popMatrix();
+
+	    //Back
+	    	this.scene.pushMatrix();
+        	this.scene.translate(0, 0, -0.5);
+        	this.scene.rotate(Math.PI,-1,0,0);
+        	this.materialTop.apply();
+        	this.quad.display();
+        	this.scene.popMatrix();
+
+	    //Right
+	    	this.scene.pushMatrix();
+        	this.scene.rotate(Math.PI/2,0,-1,0);
+        	this.scene.translate(0, 0, 0.5);
+        	this.materialTop.apply();
+        	this.quad.display();
+        	this.scene.popMatrix();
+
+	    //Left
+	    	this.scene.pushMatrix();
+        	this.scene.rotate(Math.PI/2,0,1,0);
+        	this.scene.translate(0, 0, 0.5);
+        	this.materialTop.apply();
+        	this.quad.display();
+        	this.scene.popMatrix();
+
+	    //Top
+	    	this.scene.pushMatrix();
+        	this.scene.rotate(Math.PI/2,-1,0,0);
+        	this.scene.translate(0, 0, 0.5);
+        	this.materialTop.apply();
+        	this.quad.display();
+        	this.scene.popMatrix();
+
+	    //Bottom
+		this.scene.pushMatrix();
+        	this.scene.rotate(Math.PI/2,1,0,0);
+        	this.scene.translate(0, 0, 0.5);
+        	this.materialTop.apply();
+        	this.quad.display();
+        	this.scene.popMatrix();
     }
 
-    broken(){}
+    broken(){
+        	this.scene.pushMatrix();
+        	this.scene.rotate(Math.PI*2*this.randomAng,0,1,0);
+	    //Front
+        	this.scene.pushMatrix();
+        	this.scene.rotate(Math.PI/2,-1,0,0);
+        	this.scene.translate(0, 0, -0.5);
+        	this.materialTop.apply();
+        	this.quad.display();
+        	this.scene.popMatrix();
+
+	    //Back
+	    	this.scene.pushMatrix();
+        	this.scene.translate(0, 0, 1.3);
+        	this.scene.rotate(Math.PI/6,0,1,0);
+        	this.scene.translate(0, 0, 1.7);
+        	this.scene.rotate(Math.PI/2,-1,0,0);
+        	this.scene.translate(0, 0, -0.5);
+        	this.materialTop.apply();
+        	this.quad.display();
+        	this.scene.popMatrix();
+
+	    //Right
+	    	this.scene.pushMatrix();
+        	this.scene.translate(0, 0, 1.3);
+        	this.scene.rotate(Math.PI/5,0,1,0);
+        	this.scene.rotate(Math.PI/2,-1,0,0);
+        	this.scene.translate(0, 0, -0.5);
+        	this.materialTop.apply();
+        	this.quad.display();
+        	this.scene.popMatrix();
+
+	    //Left
+	    	this.scene.pushMatrix();
+        	this.scene.translate(1.2, 0, 0);
+        	this.scene.rotate(Math.PI/2,-1,0,0);
+        	this.scene.translate(0, 0, -0.5);
+        	this.materialTop.apply();
+        	this.quad.display();
+        	this.scene.popMatrix();
+
+	    //Top
+	    	this.scene.pushMatrix();
+        	this.scene.rotate(Math.PI*8/7,0,1,0);
+        	this.scene.translate(1.2, 0, 0);
+        	this.scene.rotate(Math.PI/2,-1,0,0);
+        	this.scene.translate(0, 0, -0.5);
+        	this.materialTop.apply();
+        	this.quad.display();
+        	this.scene.popMatrix();
+
+	    //Bottom
+		this.scene.pushMatrix();
+        	this.scene.rotate(Math.PI/3,0,1,0);
+        	this.scene.translate(2, 0, 0);
+        	this.scene.rotate(Math.PI/2,-1,0,0);
+        	this.scene.translate(0, 0, -0.5);
+        	this.materialTop.apply();
+        	this.quad.display();
+        	this.scene.popMatrix();
+
+
+        	this.scene.popMatrix();
+
+	
+    }
 
     display() {
 	    if(this.state==SupplyStates.FALLING){
 	        this.scene.pushMatrix();
 	        this.scene.translate(this.xpos, this.ypos,this.zpos);
-		    this.falling();
-		    this.scene.popMatrix();
+		this.falling();
+		this.scene.popMatrix();
 	    }
 	    else if(this.state==SupplyStates.LANDED){
-		    this.broken();
+		this.scene.pushMatrix();
+	        this.scene.translate(this.xpos, this.ypos,this.zpos);
+		this.broken();
+		this.scene.popMatrix();
 	    }
     }
 
 
-    displayCube() {
-
-        //Front
-        this.scene.pushMatrix();
-        this.scene.translate(0, 0, 0.5);
-        this.materialTop.apply();
-        this.quad.display();
-        this.scene.popMatrix();
-
-	    //Back
-	    this.scene.pushMatrix();
-        this.scene.translate(0, 0, -0.5);
-        this.scene.rotate(Math.PI,-1,0,0);
-        this.materialTop.apply();
-        this.quad.display();
-        this.scene.popMatrix();
-
-	    //Right
-	    this.scene.pushMatrix();
-        this.scene.rotate(Math.PI/2,0,-1,0);
-        this.scene.translate(0, 0, 0.5);
-        this.materialTop.apply();
-        this.quad.display();
-        this.scene.popMatrix();
-
-	    //Left
-	    this.scene.pushMatrix();
-        this.scene.rotate(Math.PI/2,0,1,0);
-        this.scene.translate(0, 0, 0.5);
-        this.materialTop.apply();
-        this.quad.display();
-        this.scene.popMatrix();
-
-	    //Top
-	    this.scene.pushMatrix();
-        this.scene.rotate(Math.PI/2,-1,0,0);
-        this.scene.translate(0, 0, 0.5);
-        this.materialTop.apply();
-        this.quad.display();
-        this.scene.popMatrix();
-
-	    //Bottom
-	    this.scene.pushMatrix();
-        this.scene.rotate(Math.PI/2,1,0,0);
-        this.scene.translate(0, 0, 0.5);
-        this.materialTop.apply();
-        this.quad.display();
-        this.scene.popMatrix();
-
-
-    }
-
-    /*drop(dropx,dropy,dropz){
+    drop(dropx,dropy,dropz){
 	    this.xpos=dropx;
 	    this.ypos=dropy;
 	    this.zpos=dropz;
 	    this.state=SupplyStates.FALLING;
-    }*/
+    }
 
     update(){
 	    if(this.state==SupplyStates.FALLING){
