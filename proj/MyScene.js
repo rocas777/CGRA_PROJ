@@ -13,6 +13,8 @@ class MyScene extends CGFscene {
         super.init(application);
         this.initCameras();
         this.initLights();
+	this.d = new Date();
+	this.lastTime = this.d.getTime();
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -22,7 +24,7 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
-        this.setUpdatePeriod(50);
+        this.setUpdatePeriod(20);
         
         this.enableTextures(true);
 
@@ -59,6 +61,8 @@ class MyScene extends CGFscene {
 	    this.scaleFactor=1;
 	    this.speedFactor=1;
         this.selectedTexture = 0;  
+	this.time=0;	
+	this.autopilot=false;
 
 	    this.supplies_counter=-1;
 	    this.supplies = [];
@@ -120,10 +124,24 @@ class MyScene extends CGFscene {
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();
+	for(let i=0;i<=this.supplies_counter;i++){
+	    this.supplies[i].update();
+	}
+	if(this.autopilot){
+		this.d = new Date();
+		//console.log(this.d.getTime()-this.lastTime);
+		this.vehicle.setSpeed(this.d.getTime()-this.lastTime);
+		this.vehicle.turn((this.d.getTime()-this.lastTime)*Math.PI/2500);
+		
+		this.time += this.d.getTime()-this.lastTime;
+		if((this.time-5000)*(this.time-5000)<=400){
+			console.log(this.time,this.vehicle.xPos,this.vehicle.zPos);
+			this.time=0;	
+			this.summer=0;
+		}
+		this.lastTime = this.d;
+	}
         this.vehicle.update();
-	    for(let i=0;i<=this.supplies_counter;i++){
-		    this.supplies[i].update();
-	    }
     }
 
     drop(x,y,z){
@@ -139,50 +157,58 @@ class MyScene extends CGFscene {
         var keysPressed=false;
 
         // Check for key codes e.g. in https://keycode.info/
-        if (this.gui.isKeyPressed("KeyW")) {
-            this.vehicle.accelerate(0.01);
-            text+=" W ";
-            keysPressed=true;
-        }
-
-        if (this.gui.isKeyPressed("KeyS")) {
-            this.vehicle.accelerate(-0.01);
-            text+=" S ";
-            keysPressed=true;
-        }
-
-        if(this.gui.isKeyPressed("KeyA")){
-            this.vehicle.turn(Math.PI*5/180);
-            text += " A ";
-            keysPressed = true;
-        }
-
-        if(this.gui.isKeyPressed("KeyD")){
-            this.vehicle.turn(-Math.PI*5/180);
-            text += " D ";
-            keysPressed = true;
-        }
+	if(!this.autopilot){
+        	if (this.gui.isKeyPressed("KeyW")) {
+        	    this.vehicle.accelerate(0.01);
+        	    text+=" W ";
+        	    keysPressed=true;
+        	}
+	
+        	if (this.gui.isKeyPressed("KeyS")) {
+        	    this.vehicle.accelerate(-0.01);
+        	    text+=" S ";
+        	    keysPressed=true;
+        	}
+	
+        	if(this.gui.isKeyPressed("KeyA")){
+        	    this.vehicle.turn(Math.PI*5/180);
+        	    text += " A ";
+        	    keysPressed = true;
+        	}
+	
+        	if(this.gui.isKeyPressed("KeyD")){
+        	    this.vehicle.turn(-Math.PI*5/180);
+        	    text += " D ";
+        	    keysPressed = true;
+        	}
+		if(this.gui.isKeyPressed("KeyP")){
+			this.d = new Date();
+			this.lastTime = this.d;
+			this.autopilot=true;
+        	}
+	}
 
         if(this.gui.isKeyPressed("KeyR")){
             this.vehicle.reset();
 	        this.supplies_counter=-1;
             text += " R ";
             keysPressed = true;
+	    this.autopilot=false;
         }
 
-	    if(this.gui.isKeyPressed("KeyL")){
-		    if(this.l_is_pressed==false){
-	   		    this.l_is_pressed=true;
-           		this.drop(this.vehicle.xPos,10,this.vehicle.zPos);
-            		text += " L ";
-		    }
-            	keysPressed = true;
-        }
-
-	    if(!keysPressed){
-            	this.vehicle.turn(0);
-		    this.l_is_pressed=false;
+	if(this.gui.isKeyPressed("KeyL")){
+	    if(this.l_is_pressed==false){
+	  		    this.l_is_pressed=true;
+          		this.drop(this.vehicle.xPos,10,this.vehicle.zPos);
+           		text += " L ";
 	    }
+            keysPressed = true;
+        }
+
+	if(!keysPressed){
+        	this.vehicle.turn(0);
+		this.l_is_pressed=false;
+	}
 
     }
 

@@ -14,12 +14,19 @@ class MyVehicle extends CGFobject {
         this.yPos = yPos;
         this.zPos = zPos;
         this.initBuffers();
-	    this.val=0;
-	    this.speedFactor = 1;
+	this.val=0;
+	this.speedFactor = 1;
+	this.canCountTime = false;
+	this.time=0;
+    }
+
+    setSpeed(val){
+	this.speed = 10*Math.PI/5000*val;
     }
 
     update(){
         this.xPos += (this.speed) * Math.sin(this.deltaY) * this.speedFactor;
+	
         this.zPos += (this.speed) * Math.cos(this.deltaY) * this.speedFactor;
     }
 
@@ -27,9 +34,10 @@ class MyVehicle extends CGFobject {
         this.speed = this.speed + val;
     }
 
+
     turn(val){
-	    this.val=val;
-        this.deltaY = this.deltaY + val;
+	this.val=val;	
+	this.deltaY += val;
     }
 
     reset(){
@@ -39,6 +47,8 @@ class MyVehicle extends CGFobject {
         this.xPos = 0;
         this.yPos = 0;
         this.zPos = 0;
+	this.time=0;
+	this.canCountTime = false;
     }
 
     displayLemes(){	
@@ -63,9 +73,9 @@ class MyVehicle extends CGFobject {
 	    this.scene.pushMatrix();
 
         this.scene.translate(0, 1.3, 0);
-	    if(this.val==-Math.PI*5/180)
+	    if(this.val<0)
 		    this.scene.rotate(-Math.PI/8,0,-1,0);
-	    if(this.val==Math.PI*5/180)
+	    if(this.val>0)
 		    this.scene.rotate(-Math.PI/8,0,1,0);
 	    this.scene.rotate(Math.PI/2,0,0,1);
 	    this.scene.rotate(Math.PI/2,1,0,0);
@@ -106,7 +116,7 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();	
 
 
-	    this.scene.scale(1,1,2);
+	this.scene.scale(1,1,2);
         this.body.display();
         this.scene.popMatrix();	
     }
