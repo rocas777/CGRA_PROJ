@@ -5,7 +5,7 @@
 class MyVehicle extends CGFobject {
     constructor(scene, deltaY, initSpeed, xPos, yPos, zPos){
         super(scene);
-        this.body = new MySphere(scene, 200, 7);
+        this.body = new MySphere(scene, 300, 15);
 	    this.leme = new MyTriangle(scene);
         this.deltaY = deltaY;
         this.initSpeed = initSpeed;

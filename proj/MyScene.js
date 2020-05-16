@@ -40,6 +40,18 @@ class MyScene extends CGFscene {
         this.sphereTexture.loadTexture('images/earth.jpg');
         this.sphereTexture.setTextureWrap('REPEAT', 'REPEAT');
 
+	this.cokeTexture = new CGFappearance(this);
+        this.cokeTexture.setAmbient(1, 1, 1, 1);
+        this.cokeTexture.setShininess(10.0);
+        this.cokeTexture.loadTexture('images/cocacola.png');
+        this.cokeTexture.setTextureWrap('REPEAT', 'REPEAT');
+
+	this.zepTexture = new CGFappearance(this);
+        this.zepTexture.setAmbient(1, 1, 1, 1);
+        this.zepTexture.setShininess(10.0);
+        this.zepTexture.loadTexture('images/ledzep.png');
+        this.zepTexture.setTextureWrap('REPEAT', 'REPEAT');
+
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displaySphere = false;
@@ -102,7 +114,7 @@ class MyScene extends CGFscene {
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
-	    this.updateAppliedTexture();
+	    //this.updateAppliedTexture();
     }
     
     // called periodically (as per setUpdatePeriod() in init())
@@ -191,12 +203,30 @@ class MyScene extends CGFscene {
 	}
 	
         this.setDefaultAppearance();
+	    this.pushMatrix();
+        this.scale(50,50,50);
+        this.unitquad.display();
+	    this.popMatrix();
 
         // ---- BEGIN Primitive drawing section
 
         //This sphere does have defined texture coordinates
 	    this.pushMatrix();
+
 	    this.scale(0.5,0.5,0.5);
+
+	    this.pushMatrix();
+        if(this.displayCylinder){
+		this.cokeTexture.apply();
+            	this.cylinder.display();
+	}
+	    this.popMatrix();
+
+	this.pushMatrix();
+	this.zepTexture.apply();
+        this.vehicle.display();
+	this.popMatrix();
+
         if(this.displaySphere){
             this.pushMatrix();
             this.sphereTexture.apply();
@@ -204,24 +234,11 @@ class MyScene extends CGFscene {
             this.popMatrix();
 	    }
 
-	    //Display Cylinder
-        if(this.displayCylinder){
-            this.cylinder.display();
-	    }
-        
-        //Display Vehicle
-        this.vehicle.display();
-
-        //Draw environment
-	    this.pushMatrix();
-        this.scale(50,50,50);
-        this.unitquad.display();
-	    this.popMatrix();
-
 	    for(let i=0;i<=this.supplies_counter;i++){
 		    this.supplies[i].display();
 	    }
 	    this.popMatrix();
+
         // ---- END Primitive drawing section
     }
 }

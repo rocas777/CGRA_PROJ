@@ -13,6 +13,10 @@ class MySphere extends CGFobject {
 
     this.initBuffers();
   }
+  setTex() {
+	this.texCoords.push(0);
+	this.texCoords.push(1);
+  }
 
   /**
    * @method initBuffers
@@ -57,7 +61,9 @@ class MySphere extends CGFobject {
           this.indices.push( current + 1, next, next +1);
 	      this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
         }
-
+	else{	
+	this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
+	}
         //--- Normals
         // at each vertex, the direction of the normal is equal to 
         // the vector from the center of the sphere to the vertex.
@@ -69,6 +75,9 @@ class MySphere extends CGFobject {
       }
       phi += phiInc;
     }
+    /*for(let i=0;i<this.vertices.length;i++){
+	this.setTex();
+    }*/
 
 
     this.primitiveType = this.scene.gl.TRIANGLES;

@@ -16,7 +16,7 @@ class MyCylinder extends CGFobject {
 	    this.vertices = [];
         this.indices = [];
         this.normals = [];
-        this.textCoords = [];
+        this.texCoords = [];
 
         //Angles needded to calculate the vertices, normals and texture coordinates
         var ang = 0;
@@ -27,8 +27,8 @@ class MyCylinder extends CGFobject {
         this.vertices.push(1, 2, 0);
         this.normals.push(1, 0, 0);
         this.normals.push(1, 0, 0);
-        this.textCoords.push(alpha, 0);
-        this.textCoords.push(alpha, 1);
+        this.texCoords.push(0, 0);
+        this.texCoords.push(0, 1);
 
         //Calculates and adds the vertices, normals, and texture coordinates
         //according to the alpha angle 'alpha' 
@@ -37,8 +37,8 @@ class MyCylinder extends CGFobject {
             this.vertices.push(Math.cos(ang), 0, Math.sin(ang));
             this.normals.push(Math.cos(ang), 0, Math.sin(ang));
             this.normals.push(Math.cos(ang), 0, Math.sin(ang));
-            this.textCoords.push(ang/(2*Math.PI),0);
-            this.textCoords.push(ang/(2*Math.PI),0);
+            this.texCoords.push(1-i/this.slices,0);
+            this.texCoords.push(1-i/this.slices,1);
             ang += alpha;
         }
 
@@ -62,6 +62,5 @@ class MyCylinder extends CGFobject {
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
-    
     }
 }

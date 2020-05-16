@@ -25,6 +25,8 @@ class MyQuad extends CGFobject {
 			1, 3, 2
 		];
 
+		this.primitiveType = this.scene.gl.TRIANGLES;
+
 		//Facing Z positive
 		this.normals = [
 			0, 0, 1,
@@ -32,24 +34,13 @@ class MyQuad extends CGFobject {
 			0, 0, 1,
 			0, 0, 1
 		];
-		
-		/*
-		Texture coords (s,t)
-		+----------> s
-        |
-        |
-		|
-		v
-        t
-        */
 
 		this.texCoords = [
 			0, 1,
 			1, 1,
 			0, 0,
 			1, 0
-		]
-		this.primitiveType = this.scene.gl.TRIANGLES;
+		];
 		this.initGLBuffers();
 	}
 
