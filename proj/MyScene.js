@@ -238,8 +238,8 @@ class MyScene extends CGFscene {
         // Draw axis
         if (this.displayAxis){
             this.axis.display();
-	}
-	
+	    }
+
         this.setDefaultAppearance();
 	    this.pushMatrix();
         this.scale(50,50,50);
