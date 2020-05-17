@@ -34,7 +34,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 300, 10);
         this.cylinder = new MyCylinder(this,50);
-        this.vehicle = new MyVehicle(this, 0, 0, 0, 0, -1);
+        this.vehicle = new MyVehicle(this, 0, 0, 0, 0, 0);
 		this.unitquad = new MyUnitCubeQuad(this);
 		this.terrain = new MyTerrain(this);
     	
@@ -52,7 +52,7 @@ class MyScene extends CGFscene {
 
 
         //Objects connected to MyInterface
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.displaySphere = false;
         this.displayCylinder = false;
 		this.scaleFactor=1;
@@ -121,7 +121,7 @@ class MyScene extends CGFscene {
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
-	    //this.updateAppliedTexture();
+	    this.updateAppliedTexture();
     }
     
     // called periodically (as per setUpdatePeriod() in init())
@@ -246,6 +246,12 @@ class MyScene extends CGFscene {
         this.unitquad.display();
 	    this.popMatrix();
 
+	    this.setDefaultAppearance();
+		this.pushMatrix();
+		this.translate(0.0,-1.6,0.0);
+		this.terrain.display();
+		this.popMatrix();
+
         // ---- BEGIN Primitive drawing section
 
         //This sphere does have defined texture coordinates
@@ -259,10 +265,6 @@ class MyScene extends CGFscene {
             	this.cylinder.display();
 		}
 	    this.popMatrix();
-
-        this.pushMatrix();
-        this.terrain.display();
-        this.popMatrix();
 
 		this.pushMatrix();
         this.vehicle.display();

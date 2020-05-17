@@ -28,7 +28,7 @@ class MyTerrain extends CGFobject {
         this.terrainShader = new CGFshader(this.scene.gl, "images/shaders/terrain.vert", "images/shaders/terrain.frag");
 
         // additional texture will have to be bound to texture unit 1
-        this.terrainShader.setUniformsValues({ uSampler2: 1,uSampler3 : 2 });
+        this.terrainShader.setUniformsValues({ uSampler2 : 1, uSampler3 : 2});
 
     }
 
