@@ -260,6 +260,10 @@ class MyScene extends CGFscene {
 	}
 	    this.popMatrix();
 
+        this.pushMatrix();
+        this.terrain.display();
+        this.popMatrix();
+
 	this.pushMatrix();
         this.vehicle.display();
 	this.popMatrix();
