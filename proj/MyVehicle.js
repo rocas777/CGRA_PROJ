@@ -6,15 +6,15 @@ class MyVehicle extends CGFobject {
     constructor(scene, deltaY, initSpeed, xPos, yPos, zPos){
         super(scene);
         this.body = new MySphere(scene, 300, 15);
-	this.leme = new MyTriangle(scene);
-	this.cabineC = new MyCylinder(scene,50);
-	this.cabineS1 = new MySphere(scene, 16, 8);
-	this.cabineS2 = new MySphere(scene, 16, 8);
-	this.motorH1 = new MySphere(scene, 16, 8);
-	this.motorH2 = new MySphere(scene, 16, 8);
-	this.ventoinha1 = new MySquare(scene);
-	this.ventoinha2 = new MySquare(scene);
-	this.bandeira = new MyPlane(scene,20);
+	    this.leme = new MyTriangle(scene);
+	    this.cabineC = new MyCylinder(scene,50);
+	    this.cabineS1 = new MySphere(scene, 16, 8);
+	    this.cabineS2 = new MySphere(scene, 16, 8);
+	    this.motorH1 = new MySphere(scene, 16, 8);
+	    this.motorH2 = new MySphere(scene, 16, 8);
+	    this.ventoinha1 = new MySquare(scene);
+	    this.ventoinha2 = new MySquare(scene);
+	    this.bandeira = new MyPlane(scene,20);
         this.deltaY = deltaY;
         this.initSpeed = initSpeed;
         this.speed = initSpeed;
@@ -22,28 +22,27 @@ class MyVehicle extends CGFobject {
         this.yPos = yPos;
         this.zPos = zPos;
         this.initBuffers();
-	this.val=0;
-	this.speedFactor = 1;
-	this.canCountTime = false;
-	this.time=0;
-	this.ang=0;
-	this.randAng1 = Math.random();
-	this.randAng2 = Math.random();
+	    this.val=0;
+	    this.speedFactor = 1;
+	    this.canCountTime = false;
+	    this.time=0;
+	    this.ang=0;
+	    this.randAng1 = Math.random();
+	    this.randAng2 = Math.random();
 
-	this.bandeiraTexture = new CGFappearance(scene);
+	    this.bandeiraTexture = new CGFappearance(scene);
         this.bandeiraTexture.setAmbient(1, 1, 1, 1);
         this.bandeiraTexture.setShininess(10.0);
         this.bandeiraTexture.loadTexture('images/bandeira.jpeg');
         this.bandeiraTexture.setTextureWrap('REPEAT', 'REPEAT');
 
-	this.zepTexture = new CGFappearance(scene);
+	    this.zepTexture = new CGFappearance(scene);
         this.zepTexture.setAmbient(1, 1, 1, 1);
         this.zepTexture.setShininess(10.0);
-        //this.zepTexture.loadTexture('images/ledzep.png');
         this.zepTexture.loadTexture('images/zep.png');
         this.zepTexture.setTextureWrap('REPEAT', 'REPEAT');
 
-	this.lemeTexture = new CGFappearance(scene);
+	    this.lemeTexture = new CGFappearance(scene);
         this.lemeTexture.setDiffuse(1, 0, 0, 1);
         this.lemeTexture.setSpecular(1, 0, 0, 1);
         this.lemeTexture.setShininess(10);
@@ -51,11 +50,11 @@ class MyVehicle extends CGFobject {
     }
 
     setSpeed(val){
-	this.speed = 10*Math.PI/5000*val;
+	    this.speed = 10*Math.PI/5000*val;
     }
 
     update(){
-	this.ang += this.speed*3;
+	    this.ang += this.speed*3;
         this.xPos += (this.speed) * Math.sin(this.deltaY) * this.speedFactor;
         this.zPos += (this.speed) * Math.cos(this.deltaY) * this.speedFactor;
     }
@@ -66,8 +65,8 @@ class MyVehicle extends CGFobject {
 
 
     turn(val){
-	this.val=val;	
-	this.deltaY += val;
+	    this.val=val;
+	    this.deltaY += val;
     }
 
     reset(){
@@ -77,8 +76,8 @@ class MyVehicle extends CGFobject {
         this.xPos = 0;
         this.yPos = 0;
         this.zPos = 0;
-	this.time=0;
-	this.canCountTime = false;
+	    this.time=0;
+	    this.canCountTime = false;
     }
 
     displayLemes(){	
@@ -138,65 +137,63 @@ class MyVehicle extends CGFobject {
 
     cabine(){
         this.scene.pushMatrix();
-	this.scene.scale(1,2,1);
-	this.cabineC.display();
-        this.scene.popMatrix();	
-
-	this.cabineS1.display();
-
+	    this.scene.scale(1,2,1);
+	    this.cabineC.display();
+        this.scene.popMatrix();
+	    this.cabineS1.display();
         this.scene.pushMatrix();
         this.scene.translate(0,4,0);
-	this.cabineS2.display();
+	    this.cabineS2.display();
         this.scene.popMatrix();		
 
-	this.scene.pushMatrix();
+	    this.scene.pushMatrix();
         this.scene.translate(-0.5,0,1.2);
-	this.scene.scale(0.5,2,0.5);
-	this.motorH1.display();
+	    this.scene.scale(0.5,2,0.5);
+	    this.motorH1.display();
         this.scene.popMatrix();	
 
-	this.scene.pushMatrix();
+	    this.scene.pushMatrix();
         this.scene.translate(-0.5,0,-1.2);
-	this.scene.scale(0.5,2,0.5);
-	this.motorH2.display();
+	    this.scene.scale(0.5,2,0.5);
+	    this.motorH2.display();
         this.scene.popMatrix();	
     }
 
     ventoinhas(){
-	this.scene.pushMatrix();
+	    this.scene.pushMatrix();
         this.scene.translate(0.24,-1.2,-0.775);
-	this.scene.rotate(Math.PI/2,1,0,0);
-	this.scene.rotate(Math.PI/2,0,1,0);
+	    this.scene.rotate(Math.PI/2,1,0,0);
+	    this.scene.rotate(Math.PI/2,0,1,0);
         this.scene.rotate(Math.PI*2*this.randAng1 + this.ang, 0, 1, 0);
-	this.scene.scale(0.05,1,0.25);
+	    this.scene.scale(0.05,1,0.25);
         this.scene.rotate(Math.PI/2, -1, 0, 0);
-	this.ventoinha1.display();	
+	    this.ventoinha1.display();
         this.scene.popMatrix();
 
-	this.scene.pushMatrix();
+	    this.scene.pushMatrix();
         this.scene.translate(-0.24,-1.2,-0.775);
-	this.scene.rotate(Math.PI/2,1,0,0);
-	this.scene.rotate(Math.PI/2,0,1,0);
+	    this.scene.rotate(Math.PI/2,1,0,0);
+	    this.scene.rotate(Math.PI/2,0,1,0);
         this.scene.rotate(Math.PI*2*this.randAng2 + this.ang, 0, 1, 0);
-	this.scene.scale(0.05,1,0.25);
+	    this.scene.scale(0.05,1,0.25);
         this.scene.rotate(Math.PI/2, -1, 0, 0);
-	this.ventoinha2.display();	
+	    this.ventoinha2.display();
         this.scene.popMatrix();
     }
 
     bandeiraDisplay(){
-	this.scene.pushMatrix();
-	this.bandeiraTexture.apply();
+	    this.scene.pushMatrix();
+	    this.bandeiraTexture.apply();
         this.scene.translate(0, 0, -4);  
-	this.scene.scale(1,1,1.5);
+	    this.scene.scale(1,1,1.5);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
-	this.scene.pushMatrix();
-	this.bandeira.display();	
+	    this.scene.pushMatrix();
+	    this.bandeira.display();
         this.scene.popMatrix();
 	
-	this.scene.pushMatrix();
+	    this.scene.pushMatrix();
         this.scene.rotate(Math.PI, 0, 1, 0);
-	this.bandeira.display();	
+	    this.bandeira.display();
         this.scene.popMatrix();	 
         this.scene.popMatrix();
     }
@@ -205,29 +202,25 @@ class MyVehicle extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.translate(this.xPos, 10, this.zPos);        				
-	this.scene.scale(this.scene.scaleFactor,this.scene.scaleFactor,this.scene.scaleFactor);
+	    this.scene.scale(this.scene.scaleFactor,this.scene.scaleFactor,this.scene.scaleFactor);
         this.scene.rotate(this.deltaY, 0, 1, 0);
-	this.bandeiraDisplay();
+	    this.bandeiraDisplay();
         this.scene.pushMatrix();
-	this.lemeTexture.apply();
-	this.displayLemes();
-        this.scene.popMatrix();	
-
-	this.ventoinhas();
-
-	this.scene.scale(1,1,2);
-	this.zepTexture.apply();
+	    this.lemeTexture.apply();
+	    this.displayLemes();
+	    this.scene.popMatrix();
+	    this.ventoinhas();
+	    this.scene.scale(1,1,2);
+	    this.zepTexture.apply();
         this.body.display();
-	this.scene.pushMatrix();
+	    this.scene.pushMatrix();
         this.scene.translate(0,-1.1,-0.2);
-	this.scene.scale(0.2,0.2,0.1);
-	this.scene.rotate(Math.PI/2,1,0,0);
-	this.scene.rotate(Math.PI/2,0,1,0);
-	this.cabine();
+	    this.scene.scale(0.2,0.2,0.1);
+	    this.scene.rotate(Math.PI/2,1,0,0);
+	    this.scene.rotate(Math.PI/2,0,1,0);
+	    this.cabine();
         this.scene.popMatrix();	
-        this.scene.popMatrix();	
-
-
+        this.scene.popMatrix();
     }
 
 }
