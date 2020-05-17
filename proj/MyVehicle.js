@@ -14,6 +14,7 @@ class MyVehicle extends CGFobject {
 	this.motorH2 = new MySphere(scene, 16, 8);
 	this.ventoinha1 = new MySquare(scene);
 	this.ventoinha2 = new MySquare(scene);
+	this.bandeira = new MyPlane(scene,20);
         this.deltaY = deltaY;
         this.initSpeed = initSpeed;
         this.speed = initSpeed;
@@ -28,6 +29,25 @@ class MyVehicle extends CGFobject {
 	this.ang=0;
 	this.randAng1 = Math.random();
 	this.randAng2 = Math.random();
+
+	this.bandeiraTexture = new CGFappearance(scene);
+        this.bandeiraTexture.setAmbient(1, 1, 1, 1);
+        this.bandeiraTexture.setShininess(10.0);
+        this.bandeiraTexture.loadTexture('images/bandeira.jpeg');
+        this.bandeiraTexture.setTextureWrap('REPEAT', 'REPEAT');
+
+	this.zepTexture = new CGFappearance(scene);
+        this.zepTexture.setAmbient(1, 1, 1, 1);
+        this.zepTexture.setShininess(10.0);
+        //this.zepTexture.loadTexture('images/ledzep.png');
+        this.zepTexture.loadTexture('images/zep.png');
+        this.zepTexture.setTextureWrap('REPEAT', 'REPEAT');
+
+	this.lemeTexture = new CGFappearance(scene);
+        this.lemeTexture.setDiffuse(1, 0, 0, 1);
+        this.lemeTexture.setSpecular(1, 0, 0, 1);
+        this.lemeTexture.setShininess(10);
+        this.lemeTexture.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     setSpeed(val){
@@ -164,18 +184,39 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
     }
 
+    bandeiraDisplay(){
+	this.scene.pushMatrix();
+	this.bandeiraTexture.apply();
+        this.scene.translate(0, 0, -4);  
+	this.scene.scale(1,1,1.5);
+        this.scene.rotate(Math.PI/2, 0, 1, 0);
+	this.scene.pushMatrix();
+	this.bandeira.display();	
+        this.scene.popMatrix();
+	
+	this.scene.pushMatrix();
+        this.scene.rotate(Math.PI, 0, 1, 0);
+	this.bandeira.display();	
+        this.scene.popMatrix();	 
+        this.scene.popMatrix();
+    }
+
     display() {
+
         this.scene.pushMatrix();
         this.scene.translate(this.xPos, 10, this.zPos);        				
 	this.scene.scale(this.scene.scaleFactor,this.scene.scaleFactor,this.scene.scaleFactor);
         this.scene.rotate(this.deltaY, 0, 1, 0);
+	this.bandeiraDisplay();
         this.scene.pushMatrix();
-	    this.displayLemes();
+	this.lemeTexture.apply();
+	this.displayLemes();
         this.scene.popMatrix();	
 
 	this.ventoinhas();
 
 	this.scene.scale(1,1,2);
+	this.zepTexture.apply();
         this.body.display();
 	this.scene.pushMatrix();
         this.scene.translate(0,-1.1,-0.2);

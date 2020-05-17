@@ -11,6 +11,8 @@ class MyScene extends CGFscene {
 
     init(application) {
         super.init(application);
+	this.timeSum=20;
+	this.nOfUpdates=1;
         this.initCameras();
         this.initLights();
 	this.d = new Date();
@@ -48,18 +50,14 @@ class MyScene extends CGFscene {
         this.cokeTexture.loadTexture('images/cocacola.png');
         this.cokeTexture.setTextureWrap('REPEAT', 'REPEAT');
 
-	this.zepTexture = new CGFappearance(this);
-        this.zepTexture.setAmbient(1, 1, 1, 1);
-        this.zepTexture.setShininess(10.0);
-        this.zepTexture.loadTexture('images/ledzep.png');
-        this.zepTexture.setTextureWrap('REPEAT', 'REPEAT');
 
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displaySphere = false;
         this.displayCylinder = false;
-	    this.scaleFactor=1;
-	    this.speedFactor=1;
+	this.scaleFactor=1;
+	this.speedFactor=1;
+	this.scaleScene = 1;
         this.selectedTexture = 0;  
 	this.time=0;	
 	this.autopilot=false;
@@ -93,8 +91,9 @@ class MyScene extends CGFscene {
     }
 
     initLights() {
-        this.lights[0].setPosition(15, 2, 5, 1);
+        this.lights[0].setPosition(0, 0, 0, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
 
@@ -131,11 +130,19 @@ class MyScene extends CGFscene {
 	for(let i=0;i<=this.supplies_counter;i++){
 	    this.supplies[i].update();
 	}
+	this.d = new Date();
+	this.timeSum+=this.d.getTime()-this.lastTime;
+	this.nOfUpdates+=1;
+	
 	if(this.autopilot){
-		this.d = new Date();
-		//console.log(this.d.getTime()-this.lastTime);
-		this.vehicle.setSpeed(this.d.getTime()-this.lastTime);
-		this.vehicle.turn((this.d.getTime()-this.lastTime)*Math.PI/2500);
+		console.log((this.timeSum/this.nOfUpdates),this.d.getTime()-this.lastTime);
+		if(this.d.getTime()-this.lastTime<(this.timeSum/this.nOfUpdates)*2){
+			this.vehicle.setSpeed(this.d.getTime()-this.lastTime);
+			this.vehicle.turn((this.d.getTime()-this.lastTime)*Math.PI/2500);
+		}
+		else{
+			this.vehicle.setSpeed(0);
+		}
 		
 		this.time += this.d.getTime()-this.lastTime;
 		if((this.time-5000)*(this.time-5000)<=400){
@@ -143,8 +150,8 @@ class MyScene extends CGFscene {
 			this.time=0;	
 			this.summer=0;
 		}
-		this.lastTime = this.d;
 	}
+	this.lastTime = this.d;
         this.vehicle.update();
     }
 
@@ -224,7 +231,10 @@ class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
-        
+       
+
+	this.pushMatrix();
+	    this.scale(this.scaleScene,this.scaleScene,this.scaleScene);
         // Draw axis
         if (this.displayAxis){
             this.axis.display();
@@ -251,7 +261,6 @@ class MyScene extends CGFscene {
 	    this.popMatrix();
 
 	this.pushMatrix();
-	this.zepTexture.apply();
         this.vehicle.display();
 	this.popMatrix();
 
@@ -262,10 +271,13 @@ class MyScene extends CGFscene {
             this.popMatrix();
 	    }
 
+	    this.pushMatrix();
 	    for(let i=0;i<=this.supplies_counter;i++){
 		    this.supplies[i].display();
 	    }
 	    this.popMatrix();
+	
+	this.popMatrix();
 
         // ---- END Primitive drawing section
     }

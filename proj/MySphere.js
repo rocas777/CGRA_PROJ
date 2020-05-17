@@ -34,6 +34,8 @@ class MySphere extends CGFobject {
     var phiInc = Math.PI / this.latDivs;
     var thetaInc = (2 * Math.PI) / this.longDivs;
     var latVertices = this.longDivs + 1;
+    this.cur=0;
+    this.ne=0;
 
     // build an all-around stack at a time, starting on "north pole" and proceeding "south"
     for (let latitude = 0; latitude <= this.latDivs; latitude++) {
@@ -59,11 +61,13 @@ class MySphere extends CGFobject {
           
           this.indices.push( current + 1, current, next);
           this.indices.push( current + 1, next, next +1);
-	      this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
+	  this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
         }
 	else{	
 	this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
 	}
+	this.cur=current;
+	this.ne=next;
         //--- Normals
         // at each vertex, the direction of the normal is equal to 
         // the vector from the center of the sphere to the vertex.

@@ -28,7 +28,7 @@ class MySupply extends CGFobject {
         this.materialTop.setDiffuse(1, 1, 1, 1);
         this.materialTop.setSpecular(1, 1, 1, 1);
         this.materialTop.setShininess(10.0);
-        this.materialTop.loadTexture('images/split_cubemap/top.png');
+        this.materialTop.loadTexture('images/woodTexture.jpg');
         this.materialTop.setTextureWrap('REPEAT', 'REPEAT');
 
         this.materialBack = new CGFappearance(this.scene);
