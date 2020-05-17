@@ -6,7 +6,14 @@ class MyVehicle extends CGFobject {
     constructor(scene, deltaY, initSpeed, xPos, yPos, zPos){
         super(scene);
         this.body = new MySphere(scene, 300, 15);
-	    this.leme = new MyTriangle(scene);
+	this.leme = new MyTriangle(scene);
+	this.cabineC = new MyCylinder(scene,50);
+	this.cabineS1 = new MySphere(scene, 16, 8);
+	this.cabineS2 = new MySphere(scene, 16, 8);
+	this.motorH1 = new MySphere(scene, 16, 8);
+	this.motorH2 = new MySphere(scene, 16, 8);
+	this.ventoinha1 = new MySquare(scene);
+	this.ventoinha2 = new MySquare(scene);
         this.deltaY = deltaY;
         this.initSpeed = initSpeed;
         this.speed = initSpeed;
@@ -18,6 +25,9 @@ class MyVehicle extends CGFobject {
 	this.speedFactor = 1;
 	this.canCountTime = false;
 	this.time=0;
+	this.ang=0;
+	this.randAng1 = Math.random();
+	this.randAng2 = Math.random();
     }
 
     setSpeed(val){
@@ -25,8 +35,8 @@ class MyVehicle extends CGFobject {
     }
 
     update(){
+	this.ang += this.speed*3;
         this.xPos += (this.speed) * Math.sin(this.deltaY) * this.speedFactor;
-	
         this.zPos += (this.speed) * Math.cos(this.deltaY) * this.speedFactor;
     }
 
@@ -106,19 +116,77 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
     }
 
+    cabine(){
+        this.scene.pushMatrix();
+	this.scene.scale(1,2,1);
+	this.cabineC.display();
+        this.scene.popMatrix();	
+
+	this.cabineS1.display();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0,4,0);
+	this.cabineS2.display();
+        this.scene.popMatrix();		
+
+	this.scene.pushMatrix();
+        this.scene.translate(-0.5,0,1.2);
+	this.scene.scale(0.5,2,0.5);
+	this.motorH1.display();
+        this.scene.popMatrix();	
+
+	this.scene.pushMatrix();
+        this.scene.translate(-0.5,0,-1.2);
+	this.scene.scale(0.5,2,0.5);
+	this.motorH2.display();
+        this.scene.popMatrix();	
+    }
+
+    ventoinhas(){
+	this.scene.pushMatrix();
+        this.scene.translate(0.24,-1.2,-0.775);
+	this.scene.rotate(Math.PI/2,1,0,0);
+	this.scene.rotate(Math.PI/2,0,1,0);
+        this.scene.rotate(Math.PI*2*this.randAng1 + this.ang, 0, 1, 0);
+	this.scene.scale(0.05,1,0.25);
+        this.scene.rotate(Math.PI/2, -1, 0, 0);
+	this.ventoinha1.display();	
+        this.scene.popMatrix();
+
+	this.scene.pushMatrix();
+        this.scene.translate(-0.24,-1.2,-0.775);
+	this.scene.rotate(Math.PI/2,1,0,0);
+	this.scene.rotate(Math.PI/2,0,1,0);
+        this.scene.rotate(Math.PI*2*this.randAng2 + this.ang, 0, 1, 0);
+	this.scene.scale(0.05,1,0.25);
+        this.scene.rotate(Math.PI/2, -1, 0, 0);
+	this.ventoinha2.display();	
+        this.scene.popMatrix();
+    }
+
     display() {
         this.scene.pushMatrix();
         this.scene.translate(this.xPos, 10, this.zPos);        				
-	    this.scene.scale(this.scene.scaleFactor,this.scene.scaleFactor,this.scene.scaleFactor);
+	this.scene.scale(this.scene.scaleFactor,this.scene.scaleFactor,this.scene.scaleFactor);
         this.scene.rotate(this.deltaY, 0, 1, 0);
         this.scene.pushMatrix();
 	    this.displayLemes();
         this.scene.popMatrix();	
 
+	this.ventoinhas();
 
 	this.scene.scale(1,1,2);
         this.body.display();
+	this.scene.pushMatrix();
+        this.scene.translate(0,-1.1,-0.2);
+	this.scene.scale(0.2,0.2,0.1);
+	this.scene.rotate(Math.PI/2,1,0,0);
+	this.scene.rotate(Math.PI/2,0,1,0);
+	this.cabine();
         this.scene.popMatrix();	
+        this.scene.popMatrix();	
+
+
     }
 
 }

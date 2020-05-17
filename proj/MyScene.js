@@ -33,8 +33,8 @@ class MyScene extends CGFscene {
         this.incompleteSphere = new MySphere(this, 300, 10);
         this.cylinder = new MyCylinder(this,50);
         this.vehicle = new MyVehicle(this, 0, 0, 0, 0, -1);
-	    this.unitquad = new MyUnitCubeQuad(this);
-	    this.terrain = new MyTerrain(this);
+	this.unitquad = new MyUnitCubeQuad(this);
+	this.terrain = new MyTerrain(this);
     	
         this.sphereTexture = new CGFappearance(this);
         this.sphereTexture.setAmbient(1, 1, 1, 1);
