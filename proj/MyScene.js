@@ -11,12 +11,12 @@ class MyScene extends CGFscene {
 
     init(application) {
         super.init(application);
-	this.timeSum=20;
-	this.nOfUpdates=1;
+		this.timeSum=20;
+		this.nOfUpdates=1;
         this.initCameras();
         this.initLights();
-	this.d = new Date();
-	this.lastTime = this.d.getTime();
+		this.d = new Date();
+		this.lastTime = this.d.getTime();
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -35,8 +35,8 @@ class MyScene extends CGFscene {
         this.incompleteSphere = new MySphere(this, 300, 10);
         this.cylinder = new MyCylinder(this,50);
         this.vehicle = new MyVehicle(this, 0, 0, 0, 0, -1);
-	this.unitquad = new MyUnitCubeQuad(this);
-	this.terrain = new MyTerrain(this);
+		this.unitquad = new MyUnitCubeQuad(this);
+		this.terrain = new MyTerrain(this);
     	
         this.sphereTexture = new CGFappearance(this);
         this.sphereTexture.setAmbient(1, 1, 1, 1);
@@ -44,7 +44,7 @@ class MyScene extends CGFscene {
         this.sphereTexture.loadTexture('images/earth.jpg');
         this.sphereTexture.setTextureWrap('REPEAT', 'REPEAT');
 
-	this.cokeTexture = new CGFappearance(this);
+		this.cokeTexture = new CGFappearance(this);
         this.cokeTexture.setAmbient(1, 1, 1, 1);
         this.cokeTexture.setShininess(10.0);
         this.cokeTexture.loadTexture('images/cocacola.png');
@@ -55,12 +55,12 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displaySphere = false;
         this.displayCylinder = false;
-	this.scaleFactor=1;
-	this.speedFactor=1;
-	this.scaleScene = 1;
+		this.scaleFactor=1;
+		this.speedFactor=1;
+		this.scaleScene = 1;
         this.selectedTexture = 0;  
-	this.time=0;	
-	this.autopilot=false;
+		this.time=0;
+		this.autopilot=false;
 
 	    this.supplies_counter=-1;
 	    this.supplies = [];
@@ -127,31 +127,31 @@ class MyScene extends CGFscene {
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();
-	for(let i=0;i<=this.supplies_counter;i++){
+		for(let i=0;i<=this.supplies_counter;i++){
 	    this.supplies[i].update();
-	}
-	this.d = new Date();
-	this.timeSum+=this.d.getTime()-this.lastTime;
-	this.nOfUpdates+=1;
-	
-	if(this.autopilot){
-		console.log((this.timeSum/this.nOfUpdates),this.d.getTime()-this.lastTime);
-		if(this.d.getTime()-this.lastTime<(this.timeSum/this.nOfUpdates)*2){
-			this.vehicle.setSpeed(this.d.getTime()-this.lastTime);
-			this.vehicle.turn((this.d.getTime()-this.lastTime)*Math.PI/2500);
 		}
-		else{
-			this.vehicle.setSpeed(0);
+		this.d = new Date();
+		this.timeSum+=this.d.getTime()-this.lastTime;
+		this.nOfUpdates+=1;
+	
+		if(this.autopilot){
+			console.log((this.timeSum/this.nOfUpdates),this.d.getTime()-this.lastTime);
+			if(this.d.getTime()-this.lastTime<(this.timeSum/this.nOfUpdates)*2){
+				this.vehicle.setSpeed(this.d.getTime()-this.lastTime);
+				this.vehicle.turn((this.d.getTime()-this.lastTime)*Math.PI/2500);
+			}
+			else{
+				this.vehicle.setSpeed(0);
 		}
 		
-		this.time += this.d.getTime()-this.lastTime;
-		if((this.time-5000)*(this.time-5000)<=400){
-			console.log(this.time,this.vehicle.xPos,this.vehicle.zPos);
-			this.time=0;	
-			this.summer=0;
+			this.time += this.d.getTime()-this.lastTime;
+			if((this.time-5000)*(this.time-5000)<=400){
+				console.log(this.time,this.vehicle.xPos,this.vehicle.zPos);
+				this.time=0;
+				this.summer=0;
+			}
 		}
-	}
-	this.lastTime = this.d;
+		this.lastTime = this.d;
         this.vehicle.update();
     }
 
@@ -161,7 +161,7 @@ class MyScene extends CGFscene {
         var keysPressed=false;
 
         // Check for key codes e.g. in https://keycode.info/
-	if(!this.autopilot){
+		if(!this.autopilot){
         	if (this.gui.isKeyPressed("KeyW")) {
         	    this.vehicle.accelerate(0.01);
         	    text+=" W ";
@@ -185,40 +185,40 @@ class MyScene extends CGFscene {
         	    text += " D ";
         	    keysPressed = true;
         	}
-		if(this.gui.isKeyPressed("KeyP")){
-			this.d = new Date();
-			this.lastTime = this.d;
-			this.autopilot=true;
-        	    	keysPressed = true;
+
+			if(this.gui.isKeyPressed("KeyP")){
+				this.d = new Date();
+				this.lastTime = this.d;
+				this.autopilot=true;
+        	    keysPressed = true;
         	}
-	}
+		}
 
         if(this.gui.isKeyPressed("KeyR")){
             this.vehicle.reset();
 	        this.supplies_counter=-1;
             text += " R ";
             keysPressed = true;
-	    this.autopilot=false;
+	    	this.autopilot=false;
         }
 
-	if(this.gui.isKeyPressed("KeyL")){
-	    if(this.l_is_pressed==false){
-	  		this.l_is_pressed=true;
-			if(this.supplies_counter<4){
-				this.supplies_counter+=1;
-				this.supplies[this.supplies_counter].drop(this.vehicle.xPos,10,this.vehicle.zPos);
-				console.log(this.supplies_counter);
-			}
+		if(this.gui.isKeyPressed("KeyL")){
+	    	if(this.l_is_pressed==false){
+	  			this.l_is_pressed=true;
+				if(this.supplies_counter<4){
+					this.supplies_counter+=1;
+					this.supplies[this.supplies_counter].drop(this.vehicle.xPos,10,this.vehicle.zPos);
+					console.log(this.supplies_counter);
+				}
            		text += " L ";
-	    }
+	    	}
             keysPressed = true;
         }
 
-	if(!keysPressed){
+		if(!keysPressed){
         	this.vehicle.turn(0);
-		this.l_is_pressed=false;
-	}
-
+			this.l_is_pressed=false;
+		}
     }
 
     display() {
@@ -233,7 +233,7 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
        
 
-	this.pushMatrix();
+		this.pushMatrix();
 	    this.scale(this.scaleScene,this.scaleScene,this.scaleScene);
         // Draw axis
         if (this.displayAxis){
@@ -257,16 +257,16 @@ class MyScene extends CGFscene {
         if(this.displayCylinder){
 		this.cokeTexture.apply();
             	this.cylinder.display();
-	}
+		}
 	    this.popMatrix();
 
         this.pushMatrix();
         this.terrain.display();
         this.popMatrix();
 
-	this.pushMatrix();
+		this.pushMatrix();
         this.vehicle.display();
-	this.popMatrix();
+		this.popMatrix();
 
         if(this.displaySphere){
             this.pushMatrix();
@@ -281,7 +281,7 @@ class MyScene extends CGFscene {
 	    }
 	    this.popMatrix();
 	
-	this.popMatrix();
+		this.popMatrix();
 
         // ---- END Primitive drawing section
     }

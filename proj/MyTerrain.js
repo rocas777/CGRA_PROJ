@@ -10,30 +10,26 @@ class MyTerrain extends CGFobject {
         super(scene);
 
         //Initialize MyPlane objects
-        this.ground = new MyPlane(scene,32);
-        this.appearance = new CGFappearance(scene);
+        this.ground = new MyPlane(this.scene,20);
+        this.appearance = new CGFappearance(this.scene);
         this.appearance.setAmbient(1, 1, 1, 1);
         this.appearance.setDiffuse(1, 1, 1, 1);
         this.appearance.setSpecular(1, 1, 1, 1);
         this.appearance.setShininess(120);
 
         //Initialize Textures
-        this.textureTerrain = new CGFtexture(scene, "images/split_cubemap/terrain.jpg");
+        this.textureTerrain = new CGFtexture(this.scene, "images/terrain.jpg");
         this.appearance.setTexture(this.textureTerrain);
         this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-        this.textureMapTerrain = new CGFtexture(scene, 'images/split_cubemap/terrainmap.png');
-        this.textureColorTerrain = new CGFtexture(scene,'images/split_cubemap/altimetry.png')
+        this.textureMapTerrain = new CGFtexture(this.scene, 'images/terrainmap.png');
+        this.textureColorTerrain = new CGFtexture(this.scene,'images/altimetry.png')
 
         //Initialize shaders
-        this.terrainShader = new CGFshader(scene.gl, "images/shaders/terrain.vert", "images/shaders/terrain.frag");
+        this.terrainShader = new CGFshader(this.scene.gl, "images/shaders/terrain.vert", "images/shaders/terrain.frag");
 
         // additional texture will have to be bound to texture unit 1
         this.terrainShader.setUniformsValues({ uSampler2: 1,uSampler3 : 2 });
 
-        // shader code panels references
-        this.shadersDiv = document.getElementById("shaders");
-        this.vShaderDiv = document.getElementById("vshader");
-        this.fShaderDiv = document.getElementById("fshader");
     }
 
     display() {
