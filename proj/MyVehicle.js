@@ -54,7 +54,7 @@ class MyVehicle extends CGFobject {
     }
 
     update(){
-	    this.ang += this.speed*3;
+	this.ang += this.speed*3;
         this.xPos += (this.speed) * Math.sin(this.deltaY) * this.speedFactor;
         this.zPos += (this.speed) * Math.cos(this.deltaY) * this.speedFactor;
     }

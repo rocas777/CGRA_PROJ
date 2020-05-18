@@ -60,11 +60,8 @@ class MySphere extends CGFobject {
           
           this.indices.push( current + 1, current, next);
           this.indices.push( current + 1, next, next +1);
-	  this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
         }
-	else{	
 	this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
-	}
 	this.cur=current;
 	this.ne=next;
         //--- Normals
