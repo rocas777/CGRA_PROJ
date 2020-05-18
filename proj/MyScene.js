@@ -248,7 +248,6 @@ class MyScene extends CGFscene {
 
 	    this.setDefaultAppearance();
 		this.pushMatrix();
-		
 		this.terrain.display();
 		this.popMatrix();
 
