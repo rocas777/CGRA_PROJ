@@ -37,6 +37,7 @@ class MyScene extends CGFscene {
         this.vehicle = new MyVehicle(this, 0, 0, 0, 0, 0);
 		this.unitquad = new MyUnitCubeQuad(this);
 		this.terrain = new MyTerrain(this);
+		this.billboard = new MyBillboard(this);
     	
         this.sphereTexture = new CGFappearance(this);
         this.sphereTexture.setAmbient(1, 1, 1, 1);
@@ -65,6 +66,7 @@ class MyScene extends CGFscene {
 	    this.supplies_counter=-1;
 	    this.supplies = [];
 	    this.l_is_pressed=false;
+	    this.suppliesDropped = 0;
 
 	    this.textureIds = { 'earth': 0,'sky':1};
 	
@@ -153,6 +155,7 @@ class MyScene extends CGFscene {
 		}
 		this.lastTime = this.d;
         this.vehicle.update();
+        this.billboard.update();
     }
 
     checkKeys() {
@@ -196,13 +199,16 @@ class MyScene extends CGFscene {
 
         if(this.gui.isKeyPressed("KeyR")){
             this.vehicle.reset();
+            this.billboard.reset();
 	        this.supplies_counter=-1;
+	        this.suppliesDropped = 0;
             text += " R ";
             keysPressed = true;
 	    	this.autopilot=false;
         }
 
 		if(this.gui.isKeyPressed("KeyL")){
+			this.suppliesDropped += 1;
 	    	if(this.l_is_pressed==false){
 	  			this.l_is_pressed=true;
 				if(this.supplies_counter<4){
@@ -252,12 +258,17 @@ class MyScene extends CGFscene {
 		this.terrain.display();
 		this.popMatrix();
 
+
         // ---- BEGIN Primitive drawing section
 
         //This sphere does have defined texture coordinates
 	    this.pushMatrix();
 
 	    this.scale(0.5,0.5,0.5);
+
+		this.pushMatrix();
+		this.billboard.display();
+		this.popMatrix();
 
 	    this.pushMatrix();
         if(this.displayCylinder){

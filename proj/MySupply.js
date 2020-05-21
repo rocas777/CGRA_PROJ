@@ -9,7 +9,7 @@ class MySupply extends CGFobject {
 	    this.scene=scene;
 	    this.state=SupplyStates.INACTIVE;
         this.quad = new MyQuad(this.scene);
-	this.randomAng = Math.random();
+		this.randomAng = Math.random();
 
         this.initCubeMaterials();
     }
