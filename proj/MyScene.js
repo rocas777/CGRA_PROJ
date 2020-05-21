@@ -201,7 +201,7 @@ class MyScene extends CGFscene {
             this.vehicle.reset();
             this.billboard.reset();
 	        this.supplies_counter=-1;
-	        this.suppliesDropped = 0;
+	        this.suppliesDropped = -1;
             text += " R ";
             keysPressed = true;
 	    	this.autopilot=false;
