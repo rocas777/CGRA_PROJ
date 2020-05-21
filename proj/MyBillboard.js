@@ -51,7 +51,7 @@ class MyBillboard extends CGFobject{
         //Progress Bar
         this.scene.pushMatrix();
         this.scene.setActiveShader(this.progressBarShader);
-        this.scene.translate(0.0, -0.2, 0.0);
+        this.scene.translate(0.0, 0.7, 0.01);
         this.scene.scale(1.2, 0.2, 1.0);
         this.progressBar.display();
         this.scene.popMatrix();
@@ -61,7 +61,7 @@ class MyBillboard extends CGFobject{
         //Front
         this.scene.pushMatrix();
         this.frontAppearance.apply();
-        this.scene.translate(0, 0.0, -0.01);
+        this.scene.translate(0, 1, 0);
         this.scene.scale(2.0, 1.0, 1.0);
         this.front.display();
         this.scene.popMatrix();
@@ -69,7 +69,7 @@ class MyBillboard extends CGFobject{
         //Back
         this.scene.pushMatrix();
         this.backAppearance.apply();
-        this.scene.translate(0, 0.0, -0.02);
+        this.scene.translate(0, 1, 0);
         this.scene.rotate(Math.PI, 0, 1, 0);
         this.scene.scale(2.0, 1.0, 1.0);
         this.back.display();
@@ -78,14 +78,30 @@ class MyBillboard extends CGFobject{
         //Supports
         this.scene.pushMatrix();
         this.steelAppearance.apply();
-        this.scene.translate(0.9, -1.0, -0.01);
+        this.scene.translate(0.9, 0, 0);
         this.scene.scale(0.2, 1, 1);
         this.support.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.steelAppearance.apply();
-        this.scene.translate(-0.9, -1.0, -0.01);
+        this.scene.translate(-0.9, 0, 0);
+        this.scene.scale(0.2, 1, 1);
+        this.support.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.steelAppearance.apply();
+        this.scene.translate(0.9, 0, 0);
+        this.scene.rotate(Math.PI, 0, 1, 0);
+        this.scene.scale(0.2, 1, 1);
+        this.support.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.steelAppearance.apply();
+        this.scene.translate(-0.9, 0, 0);
+        this.scene.rotate(Math.PI, 0, 1, 0);
         this.scene.scale(0.2, 1, 1);
         this.support.display();
         this.scene.popMatrix();
