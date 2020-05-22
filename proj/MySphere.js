@@ -6,16 +6,16 @@ class MySphere extends CGFobject {
    * @param  {integer} stacks - number of stacks along Y axis, from the center to the poles (half of sphere)
    */
   constructor(scene, slices, stacks) {
-    super(scene);
-    this.latDivs = stacks * 2;
-    this.longDivs = slices;
+      super(scene);
+      this.latDivs = stacks * 2;
+      this.longDivs = slices;
 
 
-    this.initBuffers();
+      this.initBuffers();
   }
   setTex() {
-	this.texCoords.push(0);
-	this.texCoords.push(1);
+	  this.texCoords.push(0);
+	  this.texCoords.push(1);
   }
 
   /**
@@ -23,23 +23,23 @@ class MySphere extends CGFobject {
    * Initializes the sphere buffers
    */
   initBuffers() {
-    this.vertices = [];
-    this.indices = [];
-    this.normals = [];
-    this.texCoords = [];
+      this.vertices = [];
+      this.indices = [];
+      this.normals = [];
+      this.texCoords = [];
 
-    var phi = 0;
-    var theta = 0;
-    var phiInc = Math.PI / this.latDivs;
-    var thetaInc = (2 * Math.PI) / this.longDivs;
-    var latVertices = this.longDivs + 1;
-    this.cur=0;
-    this.ne=0;
+      var phi = 0;
+      var theta = 0;
+      var phiInc = Math.PI / this.latDivs;
+      var thetaInc = (2 * Math.PI) / this.longDivs;
+      var latVertices = this.longDivs + 1;
+      this.cur=0;
+      this.ne=0;
 
     // build an all-around stack at a time, starting on "north pole" and proceeding "south"
-    for (let latitude = 0; latitude <= this.latDivs; latitude++) {
-      var sinPhi = Math.sin(phi);
-      var cosPhi = Math.cos(phi);
+      for (let latitude = 0; latitude <= this.latDivs; latitude++) {
+        var sinPhi = Math.sin(phi);
+        var cosPhi = Math.cos(phi);
 
       // in each stack, build all the slices around, starting on longitude 0
       theta = 0;
@@ -61,9 +61,9 @@ class MySphere extends CGFobject {
           this.indices.push( current + 1, current, next);
           this.indices.push( current + 1, next, next +1);
         }
-	this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
-	this.cur=current;
-	this.ne=next;
+	    this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs);
+	    this.cur=current;
+	    this.ne=next;
         //--- Normals
         // at each vertex, the direction of the normal is equal to 
         // the vector from the center of the sphere to the vertex.

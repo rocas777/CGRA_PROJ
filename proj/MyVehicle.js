@@ -35,6 +35,7 @@ class MyVehicle extends CGFobject {
         this.bandeiraTexture.setShininess(10.0);
         this.bandeiraTexture.loadTexture('images/bandeira.jpeg');
         this.bandeiraTexture.setTextureWrap('REPEAT', 'REPEAT');
+        this.flagShader = new CGFshader(this.scene.gl,'images/shaders/flag.vert','images/shaders/flag.frag');
 
 	    this.zepTexture = new CGFappearance(scene);
         this.zepTexture.setAmbient(1, 1, 1, 1);

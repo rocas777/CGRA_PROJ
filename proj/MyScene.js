@@ -87,7 +87,7 @@ class MyScene extends CGFscene {
 	    this.textures = [this.texture1,this.texture2];
 
 	    for(let i=0;i<5;i++){
-		this.supplies[i] = new MySupply(this);
+			this.supplies[i] = new MySupply(this);
 	    }
 	    this.vehicle.reset();
     }
@@ -130,7 +130,7 @@ class MyScene extends CGFscene {
     update(t){
         this.checkKeys();
 		for(let i=0;i<=this.supplies_counter;i++){
-	    this.supplies[i].update();
+	    	this.supplies[i].update();
 		}
 		this.d = new Date();
 		this.timeSum+=this.d.getTime()-this.lastTime;
@@ -144,7 +144,7 @@ class MyScene extends CGFscene {
 			}
 			else{
 				this.vehicle.setSpeed(0);
-		}
+			}
 		
 			this.time += this.d.getTime()-this.lastTime;
 			if((this.time-5000)*(this.time-5000)<=400){
@@ -272,8 +272,8 @@ class MyScene extends CGFscene {
 
 	    this.pushMatrix();
         if(this.displayCylinder){
-		this.cokeTexture.apply();
-            	this.cylinder.display();
+			this.cokeTexture.apply();
+			this.cylinder.display();
 		}
 	    this.popMatrix();
 
