@@ -5,6 +5,7 @@
 class MyVehicle extends CGFobject {
     constructor(scene, deltaY, initSpeed, xPos, yPos, zPos){
         super(scene);
+        this.autopilot = false;
         this.body = new MySphere(scene, 300, 15);
 	    this.leme = new MyTriangle(scene);
 	    this.cabineC = new MyCylinder(scene,50);
@@ -55,9 +56,15 @@ class MyVehicle extends CGFobject {
     }
 
     update(){
-	this.ang += this.speed*3;
-        this.xPos += (this.speed) * Math.sin(this.deltaY) * this.speedFactor;
-        this.zPos += (this.speed) * Math.cos(this.deltaY) * this.speedFactor;
+        this.ang += this.speed*3;
+        if(!this.autopilot){
+            this.xPos += (this.speed) * Math.sin(this.deltaY) * this.speedFactor;
+            this.zPos += (this.speed) * Math.cos(this.deltaY) * this.speedFactor;
+        }
+        else{
+            this.xPos += (this.speed) * Math.sin(this.deltaY);
+            this.zPos += (this.speed) * Math.cos(this.deltaY);            
+        }
     }
 
     accelerate(val){

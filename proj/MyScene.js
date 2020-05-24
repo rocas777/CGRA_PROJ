@@ -58,6 +58,7 @@ class MyScene extends CGFscene {
         this.displayCylinder = false;
 		this.scaleFactor=1;
 		this.speedFactor=1;
+		this.speedFactorHolder=1;
 		this.scaleScene = 1;
         this.selectedTexture = 0;  
 		this.time=0;
@@ -66,6 +67,7 @@ class MyScene extends CGFscene {
 	    this.supplies_counter=-1;
 	    this.supplies = [];
 	    this.l_is_pressed=false;
+		this.p_is_pressed=false;
 	    this.suppliesDropped = 0;
 
 	    this.textureIds = { 'earth': 0,'sky':1};
@@ -188,28 +190,38 @@ class MyScene extends CGFscene {
         	    text += " D ";
         	    keysPressed = true;
         	}
-
-			if(this.gui.isKeyPressed("KeyP")){
-				this.d = new Date();
-				this.lastTime = this.d;
-				this.autopilot=true;
-        	    keysPressed = true;
-        	}
 		}
 
         if(this.gui.isKeyPressed("KeyR")){
             this.vehicle.reset();
             this.billboard.reset();
 	        this.supplies_counter=-1;
-	        this.suppliesDropped = -1;
+	        this.suppliesDropped = 0;
             text += " R ";
             keysPressed = true;
 	    	this.autopilot=false;
-        }
+		}
+		
+		if(this.gui.isKeyPressed("KeyP")){
+			if(this.p_is_pressed==false){
+				this.p_is_pressed=true;
+				if(!this.autopilot){
+					this.d = new Date();
+					this.lastTime = this.d;
+					this.autopilot=true;
+					this.vehicle.autopilot = true;
+				}
+				else{
+					this.vehicle.autopilot = false;
+					this.autopilot=false;
+				}
+			}
+			keysPressed = true;
+		}
 
 		if(this.gui.isKeyPressed("KeyL")){
-			this.suppliesDropped += 1;
 	    	if(this.l_is_pressed==false){
+				this.suppliesDropped += 1;
 	  			this.l_is_pressed=true;
 				if(this.supplies_counter<4){
 					this.supplies_counter+=1;
@@ -224,6 +236,7 @@ class MyScene extends CGFscene {
 		if(!keysPressed){
         	this.vehicle.turn(0);
 			this.l_is_pressed=false;
+			this.p_is_pressed=false;
 		}
     }
 
