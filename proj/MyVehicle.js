@@ -31,12 +31,12 @@ class MyVehicle extends CGFobject {
 	    this.randAng1 = Math.random();
 	    this.randAng2 = Math.random();
 
-	    this.bandeiraTexture = new CGFappearance(scene);
-        this.bandeiraTexture.setAmbient(1, 1, 1, 1);
-        this.bandeiraTexture.setShininess(10.0);
-        this.bandeiraTexture.loadTexture('images/bandeira.jpeg');
-        this.bandeiraTexture.setTextureWrap('REPEAT', 'REPEAT');
         this.flagShader = new CGFshader(this.scene.gl,'images/shaders/flag.vert','images/shaders/flag.frag');
+	    this.bandeiraTexture = new CGFtexture(scene,'images/bandeira.jpeg');
+
+	this.flagShader.setUniformsValues({uSampler2: 1});
+	this.flagShader.setUniformsValues({time: this.time});
+	this.flagShader.setUniformsValues({speedFactor: this.speed});
 
 	    this.zepTexture = new CGFappearance(scene);
         this.zepTexture.setAmbient(1, 1, 1, 1);
@@ -191,12 +191,14 @@ class MyVehicle extends CGFobject {
 
     bandeiraDisplay(){
 	    this.scene.pushMatrix();
-	    this.bandeiraTexture.apply();
         this.scene.translate(0, 0, -4);  
 	    this.scene.scale(1,1,1.5);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
 	    this.scene.pushMatrix();
+        this.scene.setActiveShader(this.flagShader);
+        this.bandeiraTexture.bind(1);
 	    this.bandeira.display();
+        this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
 	
 	    this.scene.pushMatrix();
@@ -207,6 +209,9 @@ class MyVehicle extends CGFobject {
     }
 
     display() {
+	this.time +=1;
+	this.flagShader.setUniformsValues({time: this.time});
+	this.flagShader.setUniformsValues({speedFactor: this.speed});
 
         this.scene.pushMatrix();
         this.scene.translate(this.xPos, 10, this.zPos);        				
