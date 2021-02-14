@@ -4,7 +4,7 @@
 
 <table style="width:50%;">
   <tr>
-    <th><a href="https://github.com/MrBlazix"><b>Pedro Pacheco</b></a></th>
+    <th><a href="https://github.com/p-paachecoo"><b>Pedro Pacheco</b></a></th>
     <th><a href="https://github.com/rocas777"><b>Miguel Pinto</b></a></th>
   </tr>
 </table>
